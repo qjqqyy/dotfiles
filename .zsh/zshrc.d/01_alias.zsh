@@ -14,4 +14,4 @@ alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias :q='exit'
 alias mosh='mosh --predict=experimental'
-alias git='noglob git'
+alias git='nocorrect noglob git'
