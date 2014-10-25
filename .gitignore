@@ -9,6 +9,7 @@
 /.weechat
 /.Xresources
 /.ncmpcpp
+/.gitconfig
 
 # ZSH junk
 /.zcompdump*
