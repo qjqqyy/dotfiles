@@ -5,5 +5,7 @@ HISTFILE=${HISTFILE:-$HOME/.zsh/history}
 HISTSIZE=5000
 SAVEHIST=$HISTSIZE
 KEYTIMEOUT=2
+
 export EDITOR='vim'
+export VISUAL='vim'
 export TZ='Asia/Singapore'
