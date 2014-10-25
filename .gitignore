@@ -1,0 +1,53 @@
+# non-dot files
+/[^.]*
+
+# Desktop only shit or
+# Machine-specific
+*.local
+/.ssh
+*viminfo
+/.weechat
+/.Xresources
+/.ncmpcpp
+
+# ZSH junk
+/.zcompdump*
+*.zwc
+
+# shit
+/.adobe
+/.aptitude
+/.aspell*
+/.cache
+/.config
+/.dmrc
+/.dbus
+/.fehbg
+/.gvfs
+/.ibus
+/.local
+/.lesshst
+/.macromedia
+/.mozilla
+/.urxvt
+/.xsession*
+/.Xauthority
+*.old
+*.orig
+*.pyc
+*gstreamer*
+*history
+
+# not using
+/.irssi
+/.bash*
+/.profile
+*pulse*
+
+# vim stuffs
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
