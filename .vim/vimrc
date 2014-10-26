@@ -23,4 +23,6 @@ call togglebg#map("<F5>")
 if has('gui_running')
 	set guifont=Inconsolata\ Medium\ 11
 endif
-source ~/.vim/vimrc.local
+if filereadable($HOME . "/.vim/vimrc.local")
+	source ~/.vim/vimrc.local
+endif
