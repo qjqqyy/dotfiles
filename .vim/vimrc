@@ -21,7 +21,7 @@ set cursorline
 call togglebg#map("<F5>")
 
 if has('gui_running')
-	set guifont=Inconsolata\ Medium\ 11
+	set guifont=Source\ Code\ Pro\ Medium\ 10
 endif
 if filereadable($HOME . "/.vim/vimrc.local")
 	source ~/.vim/vimrc.local
