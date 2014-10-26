@@ -15,3 +15,4 @@ alias free='free -m'                      # show sizes in MB
 alias :q='exit'
 alias mosh='mosh --predict=experimental'
 alias git='nocorrect noglob git'
+alias apt='nocorrect noglob apt'
