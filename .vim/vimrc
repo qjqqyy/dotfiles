@@ -22,6 +22,7 @@ call togglebg#map("<F5>")
 
 if has('gui_running')
 	set guifont=Source\ Code\ Pro\ Medium\ 10
+	set guioptions-=T
 endif
 if filereadable($HOME . "/.vim/vimrc.local")
 	source ~/.vim/vimrc.local
