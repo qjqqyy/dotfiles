@@ -3,5 +3,5 @@ source ~/.vimrc
 set nonu
 set nocursorline
 
-let vimpager_passthrough = 1
+#let vimpager_passthrough = 1
 let vimpager_scrolloff = 0
