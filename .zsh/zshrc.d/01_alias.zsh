@@ -6,13 +6,15 @@ alias la='ls -A'
 alias lla='ll -A'
 alias lh='ll -h'
 alias lah='lla -h'
+alias :q='exit'
 alias mv='nocorrect noglob timeout 5 mv -iv'
 alias rm='nocorrect noglob timeout 5 rm -Iv --one-file-system'
 alias cp="cp -i"                          # confirm before overwriting something
 alias grep='grep -i --color=tty -d skip'
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
-alias :q='exit'
 alias mosh='mosh --predict=experimental'
 alias git='nocorrect noglob git'
 alias apt='nocorrect noglob apt'
+# force mouse off
+alias mousereset="printf '\033[?1002l'"
