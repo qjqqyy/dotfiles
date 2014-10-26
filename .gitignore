@@ -5,7 +5,6 @@
 # Machine-specific
 *.local
 /.ssh
-*viminfo
 /.weechat
 /.Xresources
 /.ncmpcpp
@@ -30,6 +29,7 @@
 /.lesshst
 /.macromedia
 /.mozilla
+/.mtpaint
 /.urxvt
 /.xsession*
 /.Xauthority
@@ -51,4 +51,5 @@
 *.un~
 Session.vim
 .netrwhist
+*viminfo
 *~
