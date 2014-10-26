@@ -38,6 +38,7 @@
 *.pyc
 *gstreamer*
 *history
+*histfile
 
 # not using
 /.irssi
