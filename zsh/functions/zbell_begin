@@ -1,5 +1,0 @@
-# right before we begin to execute something, store the time it started at
-zbell_begin() {
-  zbell_timestamp=$EPOCHSECONDS
-  zbell_lastcmd=$1
-}
