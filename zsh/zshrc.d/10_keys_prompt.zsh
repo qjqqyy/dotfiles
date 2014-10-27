@@ -1,7 +1,8 @@
 autoload -Uz colors vcs_info
 colors
 PROMPT="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}:%{$fg[yellow]%}%~%{$reset_color%}%# " 
-RPROMPT="[%{$fg[magenta]%}%?%{$reset_color%}]"
+RPROMPT_="%{$fg[green]%}%* [%{$fg[magenta]%}%?%{$reset_color%}]"
+RPROMPT=$RPROMPT_
 bindkey -v
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
@@ -43,8 +44,8 @@ else
     }
 fi
 function zle-keymap-select() {
-    RPROMPT="[%{$fg[magenta]%}%?%{$reset_color%}]"
-    [[ $KEYMAP = vicmd ]] && RPROMPT="((CMD))[%{$fg[magenta]%}%?%{$reset_color%}]"
+    RPROMPT=$RPROMPT_
+    [[ $KEYMAP = vicmd ]] && RPROMPT="((CMD))$RPROMPT_"
     () { return $__prompt_status }
     zle reset-prompt
 }
