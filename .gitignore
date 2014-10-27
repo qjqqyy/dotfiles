@@ -1,50 +1,50 @@
 # non-dot files
-/[^.]*
+#/[^.]*
 
 # Desktop only shit or
 # Machine-specific
 *.local
-/.ssh
-/.weechat
-/.Xresources
-/.ncmpcpp
-/.gitconfig
+#/.ssh
+#/.weechat
+#/.Xresources
+#/.ncmpcpp
+#/.gitconfig
 
-# ZSH junk
-/.zcompdump*
-*.zwc
-
-# shit
-/.adobe
-/.aptitude
-/.aspell*
-/.cache
-/.config
-/.dmrc
-/.dbus
-/.fehbg
-/.gvfs
-/.ibus
-/.local
-/.lesshst
-/.macromedia
-/.mozilla
-/.mtpaint
-/.urxvt
-/.xsession*
-/.Xauthority
-*.old
-*.orig
-*.pyc
-*gstreamer*
+## ZSH junk
+#/.zcompdump*
+#*.zwc
+#
+## shit
+#/.adobe
+#/.aptitude
+#/.aspell*
+#/.cache
+#/.config
+#/.dmrc
+#/.dbus
+#/.fehbg
+#/.gvfs
+#/.ibus
+#/.local
+#/.lesshst
+#/.macromedia
+#/.mozilla
+#/.mtpaint
+#/.urxvt
+#/.xsession*
+#/.Xauthority
+#*.old
+#*.orig
+#*.pyc
+#*gstreamer*
 *history
-*histfile
+#*histfile
 
 # not using
-/.irssi
-/.bash*
-/.profile
-*pulse*
+#/.irssi
+#/.bash*
+#/.profile
+#*pulse*
 
 # vim stuffs
 [._]*.s[a-w][a-z]
