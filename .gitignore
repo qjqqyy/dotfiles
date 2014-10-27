@@ -12,7 +12,7 @@
 
 ## ZSH junk
 #/.zcompdump*
-#*.zwc
+*.zwc
 #
 ## shit
 #/.adobe
