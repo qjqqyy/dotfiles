@@ -11,7 +11,7 @@
 #/.gitconfig
 
 ## ZSH junk
-#/.zcompdump*
+.zcompdump
 *.zwc
 #
 ## shit
