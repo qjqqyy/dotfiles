@@ -1,13 +1,7 @@
-autoload -Uz colors #vcs_info
-colors
-PROMPT="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[cyan]%}%m%{$reset_color%}:%{$fg[yellow]%}%~%{$reset_color%}%# " 
-RPROMPT_="%{$fg[green]%}%* %{$reset_color%}[%{$fg[magenta]%}%?%{$reset_color%}]"
-RPROMPT=$RPROMPT_
 bindkey -v
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
 typeset -A key
-
 key[Home]=${terminfo[khome]}
 key[End]=${terminfo[kend]}
 key[Insert]=${terminfo[kich1]}
@@ -29,28 +23,6 @@ key[PageDown]=${terminfo[knp]}
 [[ -n "${key[Right]}"    ]]  && bindkey  "${key[Right]}"    forward-char
 [[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"   history-beginning-search-backward
 [[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}" history-beginning-search-forward
-if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
-    function zle-line-init () {
-        echoti smkx
-        typeset -g __prompt_status="$?"	#RPROMPT
-    }
-    function zle-line-finish () {
-        echoti rmkx
-    }
-    zle -N zle-line-finish
-else
-    function zle-line-init () {
-        typeset -g __prompt_status="$?" #RPROMPT
-    }
-fi
-function zle-keymap-select() {
-    RPROMPT=$RPROMPT_
-    [[ $KEYMAP = vicmd ]] && RPROMPT="((CMD))$RPROMPT_"
-    () { return $__prompt_status }
-    zle reset-prompt
-}
-zle -N zle-keymap-select
-zle -N zle-line-init
 
 # misc binds
 bindkey -a 'gg' beginning-of-buffer-or-history
