@@ -1,10 +1,15 @@
 #!/bin/zsh
 #.git/  vim/  zsh/  .gitignore  tmux.conf
 DIR=${1:-.dotfiles}
+[[ -e $HOME/.vim ]] && mv $HOME/.vim $HOME/.vim~
 ln -s $DIR/vim $HOME/.vim
+[[ -e $HOME/.vimrc ]] && mv $HOME/.vimrc $HOME/.vimrc~
 ln -s $DIR/vim/vimrc $HOME/.vimrc
 
+[[ -e $HOME/.zsh ]] && mv $HOME/.zsh $HOME/.zsh~
 ln -s $DIR/zsh $HOME/.zsh
+[[ -e $HOME/.zshrc ]] && mv $HOME/.zshrc $HOME/.zshrc~
 ln -s $DIR/zsh/zshrc $HOME/.zshrc
 
+[[ -e $HOME/.tmux.conf ]] && mv $HOME/.tmux.conf $HOME/.tmux.conf~
 ln -s $DIR/tmux.conf $HOME/.tmux.conf

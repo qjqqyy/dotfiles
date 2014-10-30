@@ -1,9 +1,24 @@
-case $TERM in
-  termite|*xterm*|konsole|konsole-256color|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term|screen*)
-    # Solarized dircolors for graphical terminals
-    eval `dircolors -b $HOME/.zsh/.dircolors`
-    ;;
-  *)
-    eval `dircolors -b`
-    ;;
-esac
+if  [[ $OSTYPE =~ gnu ]] 
+then
+    case $TERM in
+      termite|*xterm*|konsole|konsole-256color|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term|screen*)
+        # Solarized dircolors for graphical terminals
+        eval `dircolors -b $HOME/.zsh/.dircolors`
+        ;;
+      *)
+        eval `dircolors -b`
+        ;;
+    esac
+elif [[ $OSTYPE = (darwin|bsd) ]]
+then
+
+    case $TERM in
+      termite|*xterm*|konsole|konsole-256color|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term|screen*)
+        # Solarized dircolors for graphical terminals
+        export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
+        ;;
+      *)
+        #eval `dircolors -b`
+        ;;
+    esac
+fi
