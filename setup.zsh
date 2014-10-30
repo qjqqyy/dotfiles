@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 #.git/  vim/  zsh/  .gitignore  tmux.conf
 DIR=${1:-.dotfiles}
 [[ -e $HOME/.vim ]] && mv $HOME/.vim $HOME/.vim~
