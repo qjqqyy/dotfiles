@@ -7,7 +7,7 @@ case $TERM in
 #      vcs_info
       print -Pn "\e]0;%n@%m:%d\a"
     }
-    preexec () { print -Pn "\e]0;%n@%m:%d ($1)\a" }
+#    preexec () { print -Pn "\e]0;%n@%m:%d ($1)\a" }
     ;;
 #  screen|screen-256color)
 #    precmd () {
