@@ -9,7 +9,7 @@ then
         eval `dircolors -b`
         ;;
     esac
-elif [[ $OSTYPE = (darwin|bsd) ]]
+elif [[ $OSTYPE =~ (darwin|bsd) ]]
 then
     case $TERM in
       termite|*xterm*|konsole|konsole-256color|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term|screen*)
