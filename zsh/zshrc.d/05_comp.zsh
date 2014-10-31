@@ -1,6 +1,6 @@
 autoload -Uz compinit
 compinit -d ${COMPDUMPFILE:-$HOME/.zsh/.zcompdump}
-setopt completealiases completeinword alwaystoend
+setopt completeinword alwaystoend
 #zstyle :compinstall filename "$HOME/.zshrc"
 #zstyle ':completion:*:descriptions' format '%U%B%d%b%u' 
 #zstyle ':completion:*:warnings' format '%BSorry, no matches for: %d%b'
