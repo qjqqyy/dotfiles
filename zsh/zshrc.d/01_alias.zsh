@@ -26,4 +26,4 @@ alias git='nocorrect noglob git'
 alias sapt='sudo apt'
 alias apt='nocorrect noglob apt'
 # force mouse off
-alias mousereset="printf '\033[?1002l'"
+alias mousereset=" printf '\033[?1002l'"
