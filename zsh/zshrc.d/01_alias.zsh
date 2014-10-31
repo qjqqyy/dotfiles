@@ -9,7 +9,7 @@ elif [[ $OSTYPE =~ (darwin|bsd) ]]
 then
     alias ls=' ls -FGH'
     alias mv='nocorrect noglob mv -iv'
-    alias rm='nocorrect noglob rm -iv'
+    alias rm='nocorrect noglob rm -Ivx'
 fi
 alias ll='ls -l'
 alias la='ls -A'
@@ -18,7 +18,7 @@ alias lh='ll -h'
 alias lah='lla -h'
 alias :q='exit'
 alias cp="cp -i"                          # confirm before overwriting something
-alias grep='grep -i --color=tty -d skip'
+alias grep='grep -i --color=auto -d skip'
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias mosh='mosh --predict=experimental'
