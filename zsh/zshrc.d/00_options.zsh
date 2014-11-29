@@ -10,5 +10,5 @@ export EDITOR='vim'
 export VISUAL='vim'
 
 # only linux sorts like a bitch
-[[ $OSTYPE =~ bsd ]] || export LC_COLLATE='C'
+[[ $OSTYPE =~ (darwin|bsd) ]] || export LC_COLLATE='C'
 export TZ='Asia/Singapore'
