@@ -27,6 +27,9 @@ zbell_end() {
 
   if (( ! $has_ignored_cmd )) && (( ran_long )); then
     print -n "\a"
+    if [[ -n `declare -f growl` ]]; then
+        growl "$zbell_lastcmd"
+    fi
   fi
 }
 

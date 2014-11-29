@@ -1,12 +1,14 @@
 # Aliases
 alias cd=' cd'
-if  [[ $OSTYPE =~ gnu ]] 
-then
+if  [[ $OSTYPE =~ gnu ]]; then
     alias ls=' ls -FH --group-directories-first --color=auto'
     alias mv='nocorrect noglob timeout 5 mv -iv'
     alias rm='nocorrect noglob timeout 5 rm -Iv --one-file-system'
-elif [[ $OSTYPE =~ (darwin|bsd) ]]
-then
+elif [[ $OSTYPE =~ darwin ]]; then
+    alias ls=' ls -FGH'
+    alias mv='nocorrect noglob mv -iv'
+    alias rm='nocorrect noglob rm -iv'
+elif [[ $OSTYPE =~ darwin ]]; then
     alias ls=' ls -FGH'
     alias mv='nocorrect noglob mv -iv'
     alias rm='nocorrect noglob rm -Ivx'
