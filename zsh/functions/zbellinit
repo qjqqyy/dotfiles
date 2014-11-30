@@ -1,8 +1,9 @@
+#!/usr/bin/env zsh
 # zbell (terminal bell after long command)
 zmodload zsh/datetime || return
 autoload -Uz add-zsh-hook || return
 zbell_duration=15
-zbell_ignore=($EDITOR vi $PAGER man less weechat ncmpcpp alsamixer top htop)
+zbell_ignore=($EDITOR vi $PAGER man less weechat mpv ncmpcpp alsamixer top htop)
 zbell_timestamp=$EPOCHSECONDS
 
 # right before we begin to execute something, store the time it started at
