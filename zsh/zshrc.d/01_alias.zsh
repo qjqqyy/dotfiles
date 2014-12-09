@@ -8,10 +8,14 @@ elif [[ $OSTYPE =~ darwin ]]; then
     alias ls=' ls -FGH'
     alias mv='nocorrect noglob mv -iv'
     alias rm='nocorrect noglob rm -iv'
-elif [[ $OSTYPE =~ darwin ]]; then
+elif [[ $OSTYPE =~ freebsd ]]; then
     alias ls=' ls -FGH'
     alias mv='nocorrect noglob mv -iv'
     alias rm='nocorrect noglob rm -Ivx'
+elif [[ $OSTYPE =~ openbsd ]]; then
+    alias ls=' ls -FH'
+    alias mv='nocorrect noglob mv -i'
+    alias rm='nocorrect noglob rm -i'
 fi
 alias ll='ls -l'
 alias la='ls -A'
@@ -20,9 +24,13 @@ alias lh='ll -h'
 alias lah='lla -h'
 alias :q='exit'
 alias cp="cp -i"                          # confirm before overwriting something
-alias grep='grep -i --color=auto -d skip'
+if [[ $OSTYPE =~ openbsd ]]; then
+    alias grep='grep -i'
+else
+    alias grep='grep -i --color=auto -d skip'
+fi
 alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
+[[ $OSTYPE =~ linux ]] && alias free='free -m'                      # show sizes in MB
 alias mosh='mosh --predict=experimental'
 alias git='nocorrect noglob git'
 alias sapt='sudo apt'
