@@ -14,6 +14,7 @@ zbell_begin() {
 # when it finishes, if it's been running longer than $zbell_duration,
 # and we dont have an ignored command in the line, then print a bell.
 zbell_end() {
+  [[ -z ${zbell_timestamp} ]] && return 0
   ran_long=$(( $EPOCHSECONDS - $zbell_timestamp >= $zbell_duration ))
 
   has_ignored_cmd=0
@@ -28,10 +29,12 @@ zbell_end() {
 
   if (( ! $has_ignored_cmd )) && (( ran_long )); then
     print -n "\a"
+    print $zbell_lastcmd
     if [[ -n `declare -f growl` ]]; then
         growl "$zbell_lastcmd"
     fi
   fi
+  unset zbell_timestamp
 }
 
 zbellinit() {
