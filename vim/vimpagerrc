@@ -3,6 +3,7 @@ source ~/.vimrc
 set nonumber
 set nocursorline
 set laststatus=1
+set colorcolumn=0
 
 "let vimpager_passthrough = 1
 let vimpager_scrolloff = 0

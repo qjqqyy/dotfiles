@@ -6,7 +6,7 @@ syntax enable
 
 set mouse=a
 "set tw=80
-"set colorcolumn=80
+set colorcolumn=81
 
 if $USER != 'root'
 	set modeline modelines=5
