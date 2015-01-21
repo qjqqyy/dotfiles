@@ -31,7 +31,6 @@ else
 fi
 alias df='df -h'                          # human-readable sizes
 [[ $OSTYPE =~ linux ]] && alias free='free -m'                      # show sizes in MB
-alias mosh='mosh --predict=experimental'
 alias git='nocorrect noglob git'
 alias sapt='sudo apt'
 alias apt='nocorrect noglob apt'
