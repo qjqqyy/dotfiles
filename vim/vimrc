@@ -2,7 +2,7 @@ set nocompatible ruler laststatus=2 showcmd showmode number
 set incsearch ignorecase smartcase hlsearch
 set shortmess+=I
 syntax enable
-"set backspace=indent,eol,start
+set backspace=indent,eol,start
 
 set mouse=a
 "set tw=80
