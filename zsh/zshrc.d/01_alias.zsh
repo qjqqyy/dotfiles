@@ -36,7 +36,7 @@ if [[ $OSTYPE =~ openbsd ]]; then
             IFS=$_IFS
             unset _GREP_FILES
             unset _IFS
-        else if [[ $# -eq 0]]; then
+        elif [[ $# -eq 0 ]]; then
             print "usage: $0 [NO OPTIONS SUPPORTED] [pattern] [file..]"
         else
             =grep -i $* | perl -pe "s/(${1})/${bold_color}${fg[red]}\$1${reset_color}/gi" 
