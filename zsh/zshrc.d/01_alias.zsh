@@ -44,10 +44,7 @@ else
     alias grep='grep -i --color=auto -d skip'
 fi
 alias df='df -h'                          # human-readable sizes
-[[ $OSTYPE =~ linux ]] && alias free='free -m'                      # show sizes in MB
+[[ $OSTYPE =~ linux ]] && alias free='free -m'  # show sizes in MB
 alias git='nocorrect noglob git'
-alias sapt='sudo apt'
-alias apt='nocorrect noglob apt'
-alias pkg='nocorrect noglob pkg'
 # force mouse off
 alias mousereset=" printf '\033[?1002l'"
