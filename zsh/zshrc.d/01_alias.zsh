@@ -23,9 +23,9 @@ alias lla='ll -A'
 alias lh='ll -h'
 alias lah='lla -h'
 alias :q='exit'
-alias cp="cp -i"                          # confirm before overwriting something
+alias cp='cp -i'                          # confirm before overwriting something
 if [[ $OSTYPE =~ openbsd ]]; then
-    function grep () {
+    function cgrep () {
         if [[ $# -gt 2 ]]; then
             _IFS=$IFS
             IFS='|'
@@ -36,9 +36,12 @@ if [[ $OSTYPE =~ openbsd ]]; then
             IFS=$_IFS
             unset _GREP_FILES
             unset _IFS
+        else if [[ $# -eq 0]]; then
+            print "usage: $0 [NO OPTIONS SUPPORTED] [pattern] [file..]"
         else
             =grep -i $* | perl -pe "s/(${1})/${bold_color}${fg[red]}\$1${reset_color}/gi" 
         fi
+        alias grep='grep -i'
     }
 else
     alias grep='grep -i --color=auto -d skip'
