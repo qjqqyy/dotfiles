@@ -25,7 +25,21 @@ alias lah='lla -h'
 alias :q='exit'
 alias cp="cp -i"                          # confirm before overwriting something
 if [[ $OSTYPE =~ openbsd ]]; then
-    alias grep='grep -i'
+    function grep () {
+        if [[ $# -gt 2 ]]; then
+            _IFS=$IFS
+            IFS='|'
+            #perl -e "print qq+${${${@[2,$#]//\\/\\\\}//|/\\|}//\//\\\/}+"
+            _GREP_FILES="${${@[2,$#]//\\/\\\\}//\//\\/}"
+            export _GREP_FILES
+            =grep -i $* | perl -pe "s/^(\$ENV{_GREP_FILES}):/${fg[magenta]}\$1${fg[cyan]}:${reset_color}/;s/(${1})/${bold_color}${fg[red]}\$1${reset_color}/gi" 
+            IFS=$_IFS
+            unset _GREP_FILES
+            unset _IFS
+        else
+            =grep -i $* | perl -pe "s/(${1})/${bold_color}${fg[red]}\$1${reset_color}/gi" 
+        fi
+    }
 else
     alias grep='grep -i --color=auto -d skip'
 fi
