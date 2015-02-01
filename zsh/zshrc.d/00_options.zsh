@@ -7,8 +7,12 @@ HISTSIZE=5000
 SAVEHIST=$HISTSIZE
 KEYTIMEOUT=2
 
-export EDITOR='vim'
-export VISUAL='vim'
+if hash vim > /dev/null 2>&1; then
+    export EDITOR='vim'
+    export VISUAL='vim'
+else
+    export EDITOR='vi'
+fi
 
 # only linux sorts like a bitch
 [[ $OSTYPE =~ (darwin|bsd) ]] || export LC_COLLATE='C'
