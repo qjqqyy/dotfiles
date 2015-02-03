@@ -40,8 +40,8 @@ if [[ $OSTYPE =~ openbsd ]]; then
         else
             =grep -i $* | perl -pe "s/(${1})/${bold_color}${fg[red]}\$1${reset_color}/gi" 
         fi
-        alias grep='grep -i'
     }
+    alias grep='grep -i'
 else
     alias grep='grep -i --color=auto -d skip'
 fi
