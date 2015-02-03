@@ -4,6 +4,8 @@ set shortmess+=I
 syntax enable
 set backspace=indent,eol,start
 
+"set foldcolumn=2 foldmethod=syntax foldlevel=99 foldenable
+
 set mouse=a
 "set tw=80
 set colorcolumn=81
@@ -22,6 +24,9 @@ filetype plugin indent on
 set cursorline
 
 call togglebg#map("<F5>")
+
+au FileType c,h,java,js setlocal mps+==:;
+au FileType c,h setlocal cindent
 
 if has('gui_running')
 	set guifont=Source\ Code\ Pro\ Medium\ 10
