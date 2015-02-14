@@ -32,7 +32,7 @@ if [[ $OSTYPE =~ openbsd ]]; then
             #perl -e "print qq+${${${@[2,$#]//\\/\\\\}//|/\\|}//\//\\\/}+"
             _GREP_FILES="${${@[2,$#]//\\/\\\\}//\//\\/}"
             export _GREP_FILES
-            =grep -i $* | perl -pe "s/^(\$ENV{_GREP_FILES}):/${fg[magenta]}\$1${fg[cyan]}:${reset_color}/;s/(${1})/${bold_color}${fg[red]}\$1${reset_color}/gi" 
+	    =grep -i $* | perl -ne "my(\$a,\$b)=split /:/,\$_,2; \$a =~ s/^(\$ENV{_GREP_FILES})\$/${fg[magenta]}\$1${fg[cyan]}:${reset_color}/; \$b =~ s/(${1})/${bold_color}${fg[red]}\$1${reset_color}/gi; print qq!\$a\$b!"
             IFS=$_IFS
             unset _GREP_FILES _IFS
         elif [[ $# -eq 0 ]]; then
