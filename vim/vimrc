@@ -1,7 +1,8 @@
 set nocompatible ruler laststatus=2 showcmd showmode number
 set incsearch ignorecase smartcase hlsearch
+set title
 set shortmess+=I
-set breakindent
+"set breakindent
 syntax enable
 set backspace=indent,eol,start
 
