@@ -31,7 +31,8 @@ au FileType c,h,java,js setlocal mps+==:;
 au FileType c,h setlocal cindent
 
 if has('gui_running')
-	set guifont=Source\ Code\ Pro\ Medium\ 10
+"	set guifont=Source\ Code\ Pro\ Medium\ 10
+	set guicursor+=a:blinkon0
 	set guioptions-=T
 endif
 if filereadable($HOME . "/.vim/vimrc.local")
