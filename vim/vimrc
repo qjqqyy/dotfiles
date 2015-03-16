@@ -33,7 +33,8 @@ au FileType c,h setlocal cindent
 if has('gui_running')
 "	set guifont=Source\ Code\ Pro\ Medium\ 10
 	set guicursor+=a:blinkon0
-	set guioptions-=Tm
+	set guioptions-=m
+	set guioptions-=T
 endif
 if filereadable($HOME . "/.vim/vimrc.local")
 	source ~/.vim/vimrc.local
