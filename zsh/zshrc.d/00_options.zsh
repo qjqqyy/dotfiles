@@ -19,3 +19,4 @@ fi
 export TZ='Asia/Singapore'
 # *bsd console won't do utf8
 [[ TERM =~ ^vt ]] || export LANG=${LANG:-en_US.UTF-8}
+export LC_TIME=${LC_TIME:-en_GB.UTF-8}
