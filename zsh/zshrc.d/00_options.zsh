@@ -10,6 +10,7 @@ KEYTIMEOUT=2
 if hash vim > /dev/null 2>&1; then
     export EDITOR='vim'
     export VISUAL='vim'
+    alias vi=vim
 else
     export EDITOR='vi'
 fi
