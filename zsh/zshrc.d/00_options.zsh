@@ -14,6 +14,9 @@ if hash vim > /dev/null 2>&1; then
 else
     export EDITOR='vi'
 fi
+if hash less > /dev/null 2>&1; then
+    export PAGER=${PAGER:-less}
+fi
 
 # only linux sorts like a bitch
 [[ $OSTYPE =~ (darwin|bsd) ]] || export LC_COLLATE='C'
