@@ -23,6 +23,7 @@ alias lla='ll -A'
 alias lh='ll -h'
 alias lah='lla -h'
 alias :q='exit'
+alias /quit='exit'
 alias cp='cp -i'                          # confirm before overwriting something
 if [[ $OSTYPE =~ openbsd ]]; then
     function cgrep () {
