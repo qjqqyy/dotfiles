@@ -18,17 +18,16 @@ else
 	set nomodeline
 endif 
 
-let g:solarized_termtrans=1
-set t_Co=16
-set background=dark " dark | light "
-colorscheme solarized
-filetype plugin indent on
+colorscheme base16-bright
 set cursorline
 
-call togglebg#map("<F5>")
+set t_Co=16
+filetype plugin indent on
+
 
 au FileType c,h,java,js setlocal mps+==:;
 au FileType c,h setlocal cindent
+au FileType pl,perl setlocal sw=4 sts=4 et
 
 if has('gui_running')
 "	set guifont=Source\ Code\ Pro\ Medium\ 10
