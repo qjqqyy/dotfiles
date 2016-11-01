@@ -29,6 +29,7 @@ filetype plugin indent on
 au FileType c,h,java,js setlocal mps+==:;
 au FileType c,h setlocal cindent
 au FileType pl,perl setlocal sw=4 sts=4 et
+au FileType zsh setlocal sw=4 ts=4 et
 
 let g:airline_powerline_fonts=1
 let g:airline_theme='base16_bright'
