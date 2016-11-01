@@ -3,6 +3,7 @@ set incsearch ignorecase smartcase hlsearch
 set title
 set shortmess+=I
 "set breakindent
+execute pathogen#infect()
 syntax enable
 set backspace=indent,eol,start
 
@@ -28,6 +29,9 @@ filetype plugin indent on
 au FileType c,h,java,js setlocal mps+==:;
 au FileType c,h setlocal cindent
 au FileType pl,perl setlocal sw=4 sts=4 et
+
+let g:airline_powerline_fonts=1
+let g:airline_theme='base16_bright'
 
 if has('gui_running')
 "	set guifont=Source\ Code\ Pro\ Medium\ 10
