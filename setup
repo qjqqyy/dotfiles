@@ -1,6 +1,6 @@
-#!/usr/bin/env zsh
-#.git/  vim/  zsh/  .gitignore  tmux.conf
-DIR=${1:-.dotfiles}
+# Any shell should work
+DIR='.dotfiles'
+cd $HOME
 [[ -e $HOME/.vim ]] && mv $HOME/.vim $HOME/.vim~
 ln -s $DIR/vim $HOME/.vim
 [[ -e $HOME/.vimrc ]] && mv $HOME/.vimrc $HOME/.vimrc~
@@ -13,3 +13,5 @@ ln -s $DIR/zsh/zshrc $HOME/.zshrc
 
 [[ -e $HOME/.tmux.conf ]] && mv $HOME/.tmux.conf $HOME/.tmux.conf~
 ln -s $DIR/tmux.conf $HOME/.tmux.conf
+
+echo " => You might want to \`git submodule init' and \`git submodule update'"
