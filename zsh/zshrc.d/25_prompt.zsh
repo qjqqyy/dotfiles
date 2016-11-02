@@ -2,7 +2,7 @@
 #autoload -Uz colors #vcs_info
 #colors
 # Wild guess: if the terminal supports colour I most likely patched the fonts
-[[ $TERM =~ color ]] && POWERLINE_FONTS=${POWERLINE_FONTS:-YES}
+[[ $TERM =~ color ]] && export POWERLINE_FONTS=${POWERLINE_FONTS:-YES}
 if [[ $POWERLINE_FONTS =~ ^[yY][eE][sS]$ ]]; then
     PROMPT="%K{green}%F{black}%B %n@%m %b%F{green}%K{11}%F{11}%K{9}%F{black} %~ %F{9}%k%f "
     PS2="%K{11}%F{8}%B %_ %b%k%F{11}%f "
