@@ -1,4 +1,4 @@
-set nocompatible ruler laststatus=2 showcmd showmode number
+set nocompatible ruler laststatus=2 showcmd noshowmode number
 set incsearch ignorecase smartcase hlsearch
 set title
 set shortmess+=I
