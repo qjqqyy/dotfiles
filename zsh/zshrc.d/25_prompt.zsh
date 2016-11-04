@@ -1,6 +1,8 @@
 # colors needed by openbsd grep alias
 #autoload -Uz colors #vcs_info
 #colors
+
+ZLE_RPROMPT_INDENT=0
 # Wild guess: if the terminal supports colour I most likely patched the fonts
 [[ $TERM =~ color ]] && export POWERLINE_FONTS=${POWERLINE_FONTS:-YES}
 if [[ $POWERLINE_FONTS =~ ^[yY][eE][sS]$ ]]; then
