@@ -14,7 +14,7 @@ else
 fi
 function zle-keymap-select() {
     if [[ $KEYMAP = vicmd ]]; then
-	RPROMPT_VI="%F{11}%F{green}%K{11}%B NORMAL %b%K{11}"
+	RPROMPT_VI="%F{11}%F{yellow}%K{11}%B NORMAL %b%K{11}"
     else
         RPROMPT_VI="%F{11}%F{blue}%K{11}%B INSERT %b%K{11}"
     fi
