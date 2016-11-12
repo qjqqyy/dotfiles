@@ -1,5 +1,5 @@
 " vim: set filetype=vim :
-source ~/.vimrc
+source ~/.vim/vimrc
 set nonumber
 set nocursorline
 set laststatus=1

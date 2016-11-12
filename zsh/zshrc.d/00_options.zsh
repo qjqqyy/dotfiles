@@ -2,6 +2,8 @@ setopt autocd autocontinue correct extendedglob extendedhistory histignoredups h
 autoload -Uz zmv run-help run-help-git ex colors
 colors
 
+# ignore autocorrect to autocomplete definitions
+CORRECT_IGNORE='_*'
 HISTFILE=${HISTFILE:-$HOME/.zsh/history}
 HISTSIZE=5000
 SAVEHIST=$HISTSIZE
@@ -19,7 +21,6 @@ if hash less > /dev/null 2>&1; then
 fi
 
 export TZ='Asia/Singapore'
-# *bsd console won't do utf8
 export LC_COLLATE='C'
 export LC_TIME=${LC_TIME:-en_GB.UTF-8}
 [[ TERM =~ ^vt ]] || export LANG=${LANG:-en_US.UTF-8}
