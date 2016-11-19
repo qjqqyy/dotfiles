@@ -17,6 +17,8 @@ elif [[ $OSTYPE =~ openbsd ]]; then
     alias mv='nocorrect noglob mv -i'
     alias rm='nocorrect noglob rm -i'
 fi
+# # be paranoid
+alias cp='cp -ip'
 alias ll='ls -l'
 alias la='ls -A'
 alias lla='ll -A'
@@ -24,7 +26,6 @@ alias lh='ll -h'
 alias lah='lla -h'
 alias :q='exit'
 alias /quit='exit'
-alias cp='cp -i'                          # confirm before overwriting something
 if [[ $OSTYPE =~ openbsd ]]; then
     function cgrep () {
         if [[ $# -gt 2 ]]; then
