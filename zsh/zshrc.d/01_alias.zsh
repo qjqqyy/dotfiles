@@ -44,6 +44,8 @@ if [[ $OSTYPE =~ openbsd ]]; then
         fi
     }
     alias grep='grep -i'
+elif [[ $OSTYPE =~ freebsd ]]; then
+    alias grep='bsdgrep -i --color=auto -d skip'
 else
     alias grep='grep -i --color=auto -d skip'
 fi
