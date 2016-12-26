@@ -14,7 +14,7 @@ case $TERM in
     }
     preexec () {
       print -Pn "\e]0;%n@%m:%d "
-      print -n "(${(q)1})\a"
+      print -n "(${(q)1//[[:space:]]/ })\a"
     }
     ;;
 #  screen|screen-256color)
