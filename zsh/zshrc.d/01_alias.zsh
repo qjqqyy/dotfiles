@@ -26,25 +26,7 @@ alias lh='ll -h'
 alias lah='lla -h'
 alias :q='exit'
 alias /quit='exit'
-if [[ $OSTYPE =~ openbsd ]]; then
-    function cgrep () {
-        if [[ $# -gt 2 ]]; then
-            _IFS=$IFS
-            IFS='|'
-            #perl -e "print qq+${${${@[2,$#]//\\/\\\\}//|/\\|}//\//\\\/}+"
-            _GREP_FILES="${${@[2,$#]//\\/\\\\}//\//\\/}"
-            export _GREP_FILES
-	    =grep -i $* | perl -ne "my(\$a,\$b)=split /:/,\$_,2; \$a =~ s/^(\$ENV{_GREP_FILES})\$/${fg[magenta]}\$1${fg[cyan]}:${reset_color}/; \$b =~ s/(${1})/${bold_color}${fg[red]}\$1${reset_color}/gi; print qq!\$a\$b!"
-            IFS=$_IFS
-            unset _GREP_FILES _IFS
-        elif [[ $# -eq 0 ]]; then
-            print "usage: $0 [NO OPTIONS SUPPORTED] [pattern] [file ...]"
-        else
-            =grep -i $* | perl -pe "s/(${1})/${bold_color}${fg[red]}\$1${reset_color}/gi" 
-        fi
-    }
-    alias grep='grep -i'
-elif [[ $OSTYPE =~ freebsd ]]; then
+if [[ $OSTYPE =~ freebsd ]]; then
     alias grep='bsdgrep -i --color=auto -d skip'
 else
     alias grep='grep -i --color=auto -d skip'
@@ -52,5 +34,6 @@ fi
 alias df='df -h'                          # human-readable sizes
 [[ $OSTYPE =~ linux ]] && alias free='free -m'  # show sizes in MB
 alias git='nocorrect noglob git'
+alias minprompt='PROMPT=%#\ ;RPROMPT=;clear'
 # force mouse off
 alias mousereset=" printf '\033[?1002l'"
