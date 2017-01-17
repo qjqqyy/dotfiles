@@ -20,6 +20,9 @@ fi
 if hash less > /dev/null 2>&1; then
     PAGER=${PAGER:-less}
 fi
+if hash doas > /dev/null 2>&1; then
+    alias sudo='doas'
+fi
 
 TZ=${TZ:-Asia/Singapore}
 LC_COLLATE='C'
