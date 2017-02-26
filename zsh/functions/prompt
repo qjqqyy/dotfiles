@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+prompt () {
+    case $1 in
+        min)
+            PROMPT='%# '
+            RPROMPT=
+            ;;
+        min2)
+            PROMPT='%~ %# '
+            RPROMPT=
+            ;;
+        ssh)
+            PROMPT='%F{11}┌-%B(%b%F{green}%n%F{11}@%F{12}%m%F{11}%B)-(%b%F{12}%l%B%F{11})-(%b%F{3}%D{%H}%F{9}%D{%M}%F{14}%D{%S}%F{11}%B)-%(?..%F{yellow}[%b%F{red}%?%F{yellow}%B]%F{11}-)(%b%F{blue}%~%B%F{11})%b%F{11}┌-
+└-%(#.%F{red}%B#.>)%f '
+            RPROMPT=
+            ;;
+        *)
+            # normal & tmux prompt
+            PROMPT='%F{3}%~ %f%# '
+            RPROMPT='%(?.%F{201}ヾ(●´▽｀●)ﾉ彡☆勹”ﾉヽ.%F{red}┬─┬%F{magenta} ︵ ╯(°□° ╯%))'
+            ;;
+    esac
+}

@@ -1,3 +1,13 @@
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+	function zle-line-init() {
+	    echoti smkx
+	}
+	function zle-line-finish() {
+	    echoti rmkx
+	}
+	zle -N zle-line-init
+	zle -N zle-line-finish
+fi
 bindkey -v
 # create a zkbd compatible hash;
 # to add other keys to this hash, see: man 5 terminfo
