@@ -1,1 +1,1 @@
-autoload zbellinit && zbellinit
+autoload -Uz zbellinit && zbellinit
