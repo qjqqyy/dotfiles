@@ -16,7 +16,7 @@ prompt () {
             ;;
         *)
             # normal & tmux prompt
-            PROMPT='%F{3}%~ %f%# '
+            PROMPT='%F{3}%~ %F{12}%# %f'
             RPROMPT='%(?.%F{201}ヾ(●´▽｀●)ﾉ彡☆勹”ﾉヽ.%F{red}┬─┬%F{magenta} ︵ ╯(°□° ╯%))'
             ;;
     esac
