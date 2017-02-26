@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+print '#!/usr/bin/env zsh'
+print 'typeset -U path'
+print '[[ -d $HOME/bin ]] && path=($HOME/bin $path)'
+print '[[ -r $HOME/.zsh/zshrc.local ]] && source $HOME/.zsh/zshrc.local'
+cd ${0:A:h}/zsh
+[[ -d ./functions ]] && cat ./functions/*
+[[ -d ./zshrc.d ]] && cat ./zshrc.d/*.zsh | sed '/autoload -Uz zbellinit/d'
