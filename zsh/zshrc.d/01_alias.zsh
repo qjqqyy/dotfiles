@@ -1,21 +1,21 @@
 # Aliases
 alias cd=' cd'
 if  [[ $OSTYPE =~ gnu ]]; then
-    alias ls=' ls -FH --group-directories-first --color=auto'
-    alias mv='nocorrect noglob timeout 5 mv -iv'
-    alias rm='nocorrect noglob timeout 5 rm -Iv --one-file-system'
+  alias ls=' ls -FH --group-directories-first --color=auto'
+  alias mv='nocorrect noglob timeout 5 mv -iv'
+  alias rm='nocorrect noglob timeout 5 rm -Iv --one-file-system'
 elif [[ $OSTYPE =~ darwin ]]; then
-    alias ls=' ls -FGH'
-    alias mv='nocorrect noglob mv -iv'
-    alias rm='nocorrect noglob rm -iv'
+  alias ls=' ls -FGH'
+  alias mv='nocorrect noglob mv -iv'
+  alias rm='nocorrect noglob rm -iv'
 elif [[ $OSTYPE =~ freebsd ]]; then
-    alias ls=' ls -FGH'
-    alias mv='nocorrect noglob mv -iv'
-    alias rm='nocorrect noglob rm -Ivx'
+  alias ls=' ls -FGH'
+  alias mv='nocorrect noglob mv -iv'
+  alias rm='nocorrect noglob rm -Ivx'
 elif [[ $OSTYPE =~ openbsd ]]; then
-    alias ls=' ls -FH'
-    alias mv='nocorrect noglob mv -i'
-    alias rm='nocorrect noglob rm -i'
+  alias ls=' ls -FH'
+  alias mv='nocorrect noglob mv -i'
+  alias rm='nocorrect noglob rm -i'
 fi
 # # be paranoid
 alias cp='cp -ip'
@@ -27,11 +27,11 @@ alias lah='lla -h'
 alias :q='exit'
 alias /quit='exit'
 if [[ $OSTYPE =~ freebsd ]]; then
-    alias grep='bsdgrep -i --color=auto -d skip'
+  alias grep='bsdgrep -i --color=auto -d skip'
 else
-    alias grep='grep -i --color=auto -d skip'
+  alias grep='grep -i --color=auto -d skip'
 fi
-alias df='df -h'                          # human-readable sizes
+alias df='df -h'
 [[ $OSTYPE =~ linux ]] && alias free='free -m'  # show sizes in MB
 alias git='nocorrect noglob git'
 # force mouse off

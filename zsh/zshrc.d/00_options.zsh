@@ -11,21 +11,21 @@ SAVEHIST=$HISTSIZE
 KEYTIMEOUT=2
 
 if hash vim > /dev/null 2>&1; then
-    EDITOR='vim'
-    VISUAL='vim'
-    alias vi=vim
+  EDITOR='vim'
+  VISUAL='vim'
+  alias vi=vim
 else
-    EDITOR='vi'
+  EDITOR='vi'
 fi
 if hash less > /dev/null 2>&1; then
-    PAGER=${PAGER:-less}
+  PAGER=${PAGER:-less}
 fi
 if hash doas > /dev/null 2>&1; then
-    alias sudo='doas'
+  alias sudo='doas'
 fi
 
 TZ=${TZ:-Asia/Singapore}
 LC_COLLATE='C'
 LC_TIME=${LC_TIME:-en_GB.UTF-8}
-[[ TERM =~ ^vt ]] || LANG=${LANG:-en_US.UTF-8}
+LANG=${LANG:-en_US.UTF-8}
 export EDITOR VISUAL PAGER TZ LC_COLLATE LC_TIME LANG
