@@ -1,23 +1,28 @@
 # Aliases
-alias cd=' cd'
-if  [[ $OSTYPE =~ gnu ]]; then
-  alias ls=' ls -FH --group-directories-first --color=auto'
-  alias mv='nocorrect noglob timeout 5 mv -iv'
-  alias rm='nocorrect noglob timeout 5 rm -Iv --one-file-system'
-elif [[ $OSTYPE =~ darwin ]]; then
-  alias ls=' ls -FGH'
-  alias mv='nocorrect noglob mv -iv'
-  alias rm='nocorrect noglob rm -iv'
-elif [[ $OSTYPE =~ freebsd ]]; then
-  alias ls=' ls -FGH'
-  alias mv='nocorrect noglob mv -iv'
-  alias rm='nocorrect noglob rm -Ivx'
-elif [[ $OSTYPE =~ openbsd ]]; then
-  alias ls=' ls -FH'
-  alias mv='nocorrect noglob mv -i'
-  alias rm='nocorrect noglob rm -i'
-fi
+case $OSTYPE in
+  *gnu)
+    alias ls='ls -FH --group-directories-first --color=auto'
+    alias rm='nocorrect noglob rm -Iv --one-file-system'
+    ;;
+  *darwin*)
+    alias ls='ls -FGH'
+    alias rm='nocorrect noglob rm -iv'
+    ;;
+  freebsd*)
+    alias ls='ls -FGH'
+    alias rm='nocorrect noglob rm -Ivx'
+    ;;
+  openbsd*)
+    alias ls='ls -FH'
+    alias rm='nocorrect noglob rm -i'
+    ;;
+esac
 # # be paranoid
+if [[ $OSTYPE =~ openbsd ]]; then
+  alias mv='nocorrect noglob mv -i'
+else
+  alias mv='nocorrect noglob mv -iv'
+fi
 alias cp='cp -ip'
 alias ll='ls -l'
 alias la='ls -A'
