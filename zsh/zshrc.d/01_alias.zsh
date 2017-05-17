@@ -1,6 +1,6 @@
 # Aliases
 case $OSTYPE in
-  *gnu)
+  *gnu|*linux*)
     alias ls='ls -FH --group-directories-first --color=auto'
     alias rm='nocorrect noglob rm -Iv --one-file-system'
     ;;
