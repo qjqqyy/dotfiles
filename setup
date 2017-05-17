@@ -1,5 +1,6 @@
 #!/bin/sh
-DIR="$HOME/.dotfiles"
+DIR=${DIR:.dotfiles}
+cd
 [ -e $HOME/.vim ]	&& mv $HOME/.vim	$HOME/.vim.BAK
 ln -s $DIR/vim $HOME/.vim 
 
