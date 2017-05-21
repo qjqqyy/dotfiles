@@ -2,13 +2,13 @@
 # Window title
 #------------------------------
 case $TERM in
-  termite|*xterm*|konsole|konsole-256color|(dt|k|E)term)
+  termite|(dt|k|E)term)
     precmd () {
       print -Pn "\e]0;%n@%m:%d\a"
     }
 #    preexec () { print -Pn "\e]0;%n@%m:%d ($1)\a" }
     ;;
-  *rxvt*)
+  *rxvt*|*xterm*|*konsole*)
     precmd () {
       print -Pn "\e]0;%n@%m:%d\a"
     }
