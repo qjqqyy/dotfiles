@@ -29,3 +29,15 @@ LC_COLLATE='C'
 LC_TIME=${LC_TIME:-en_GB.UTF-8}
 LANG=${LANG:-en_US.UTF-8}
 export EDITOR VISUAL PAGER TZ LC_COLLATE LC_TIME LANG
+
+if [[ $OSTYPE =~ freebsd ]]; then
+  # sanitize $TERM
+  case $TERM in
+    *konsole*)
+      TERM=xterm-256color
+      ;;
+    *tmux*)
+      TERM=screen-256color
+      ;;
+  esac
+fi
