@@ -12,13 +12,13 @@ case $OSTYPE in
     alias ls='ls -FGH'
     alias rm='nocorrect noglob rm -Ivx'
     ;;
-  openbsd*)
+  solaris*|openbsd*)
     alias ls='ls -FH'
     alias rm='nocorrect noglob rm -i'
     ;;
 esac
 # # be paranoid
-if [[ $OSTYPE =~ openbsd ]]; then
+if [[ $OSTYPE =~ (openbsd|solaris) ]]; then
   alias mv='nocorrect noglob mv -i'
 else
   alias mv='nocorrect noglob mv -iv'
@@ -33,6 +33,8 @@ alias :q='exit'
 alias /quit='exit'
 if [[ $OSTYPE =~ freebsd ]]; then
   alias grep='bsdgrep -i --color=auto -d skip'
+elif [[ $OSTYPE =~ (openbsd|solaris) ]]; then
+  alias grep='grep -i'
 else
   alias grep='grep -i --color=auto -d skip'
 fi
