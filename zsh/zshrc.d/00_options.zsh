@@ -17,8 +17,15 @@ if hash vim > /dev/null 2>&1; then
 else
   EDITOR='vi'
 fi
-if hash less > /dev/null 2>&1; then
+if [[ -x $HOME/.vim/bundle/vimpager/vimpager ]]; then
+  PAGER=$HOME/.vim/bundle/vimpager/vimpager
+  alias less=$PAGER
+elif hash less > /dev/null 2>&1; then
   PAGER=${PAGER:-less}
+fi
+if [[ -x $HOME/.vim/bundle/vimpager/vimcat ]]; then
+  READNULLCMD=$HOME/.vim/bundle/vimpager/vimcat
+  alias vimcat=$READNULLCMD
 fi
 if hash doas > /dev/null 2>&1; then
   alias sudo='doas'
