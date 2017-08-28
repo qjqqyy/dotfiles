@@ -1,6 +1,6 @@
 [[ $TERM =~ (rxvt|screen|tmux) ]] && ZLE_RPROMPT_INDENT=0
 autoload -Uz prompt
-if `typeset -f prompt`; then
+if typeset -f prompt > /dev/null 2>&1; then
   # check SSH
   if [[ -n $SSH_CLIENT ]]; then
     prompt ssh
