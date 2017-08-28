@@ -12,4 +12,4 @@ ln -s $DIR/zsh/zshrc $HOME/.zshrc
 [ -e $HOME/.tmux.conf ]	&& mv $HOME/.tmux.conf	$HOME/.tmux.conf.BAK
 ln -s $DIR/tmux.conf $HOME/.tmux.conf
 
-echo "=> You might want to \`git submodule init' and \`git submodule update'"
+echo "=> You might want to \`git submodule update --init'"
