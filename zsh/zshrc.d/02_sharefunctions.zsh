@@ -20,6 +20,6 @@ sprunge() {
   cat $* | curl -sSf -F 'sprunge=<-' http://sprunge.us | clipboard
 }
 0x0() {
-  curl -sSf -F"file=@$1" http://0x0.st | clipboard
+  curl -sSf -F"file=@$1" https://0x0.st | clipboard
 }
 autoload -Uz ghetty && alias ghetty='noglob ghetty'
