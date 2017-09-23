@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+cereal () {
+  if [[ -z "$1" ]]; then
+    print "usage: $0 file [POST endpoint]"
+    return 1
+  fi
+  serv=${2-http://ce.re.al/upload?output=gyazo}
+  curl -sSf $serv -F"files=@$1" | clipboard
+}
