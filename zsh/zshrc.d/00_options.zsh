@@ -18,6 +18,7 @@ else
   EDITOR='vi'
 fi
 if [[ -x $HOME/.vim/bundle/vimpager/vimpager ]]; then
+  export GIT_PAGER=${PAGER:-less}
   PAGER=$HOME/.vim/bundle/vimpager/vimpager
   alias less=$PAGER
 elif hash less > /dev/null 2>&1; then
