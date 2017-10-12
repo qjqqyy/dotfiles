@@ -14,10 +14,10 @@ set mouse=a
 set colorcolumn=81
 
 if $USER != 'root'
-	set modeline modelines=5
+    set modeline modelines=5
 else
-	set nomodeline
-endif 
+    set nomodeline viminfo=
+endif
 
 colorscheme base16-monokai
 set cursorline
@@ -35,7 +35,7 @@ au FileType tex setlocal sw=4 ts=4 et cc=0
 let g:airline_theme='base16_monokai'
 let g:airline_powerline_fonts=0
 if !exists('g:airline_symbols')
-        let g:airline_symbols = {}
+    let g:airline_symbols = {}
 endif
 " unicode symbols
 let g:airline_left_sep = ' '
@@ -48,12 +48,12 @@ let g:airline_symbols.maxlinenr = ''
 
 
 if has('gui_running')
-"	set guifont=Source\ Code\ Pro\ Medium\ 10
-	set guicursor+=a:blinkon0
-	set guioptions-=m
-	set guioptions-=r
-	set guioptions-=T
+"    set guifont=Source\ Code\ Pro\ Medium\ 10
+    set guicursor+=a:blinkon0
+    set guioptions-=m
+    set guioptions-=r
+    set guioptions-=T
 endif
 if filereadable($HOME . "/.vim/vimrc.local")
-	source ~/.vim/vimrc.local
+    source ~/.vim/vimrc.local
 endif
