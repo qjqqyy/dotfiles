@@ -2,7 +2,7 @@
 DIR=${DIR:.dotfiles}
 cd
 [ -e $HOME/.vim ]	&& mv $HOME/.vim	$HOME/.vim.BAK
-ln -s $DIR/vim $HOME/.vim 
+ln -s $DIR/vim $HOME/.vim
 
 [ -e $HOME/.zsh ]	&& mv $HOME/.zsh	$HOME/.zsh.BAK
 ln -s $DIR/zsh $HOME/.zsh
