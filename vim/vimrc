@@ -33,6 +33,8 @@ au FileType zsh setlocal sw=2 sts=2 et
 au FileType tex setlocal sw=4 sts=4 et cc=0
 au FileType haskell,lhaskell setlocal sw=2 sts=2 et cc=0
 
+let lhs_markup='tex'
+
 let g:airline_theme='base16_monokai'
 let g:airline_powerline_fonts=0
 if !exists('g:airline_symbols')
