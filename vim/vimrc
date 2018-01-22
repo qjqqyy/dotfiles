@@ -31,6 +31,8 @@ au FileType c,h setlocal cindent
 au FileType pl,perl,perl6 setlocal sw=4 sts=4 et
 au FileType zsh setlocal sw=2 sts=2 et
 au FileType tex setlocal sw=4 sts=4 et cc=0
+" autocompile tex on :w
+au FileType tex autocmd BufWritePost * BuildTexPdf
 au FileType haskell,lhaskell setlocal sw=2 sts=2 et cc=0
 
 let lhs_markup='tex'
