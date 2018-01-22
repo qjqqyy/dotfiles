@@ -7,6 +7,3 @@
 [submodule "vim/bundle/vimpager"]
 	path = vim/bundle/vimpager
 	url = https://github.com/rkitover/vimpager.git
-[submodule "vim/bundle/vimtex"]
-	path = vim/bundle/vimtex
-	url = https://github.com/lervag/vimtex.git
