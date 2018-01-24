@@ -154,8 +154,9 @@ function! <SID>BuildTexPdf(view_results, ...)
     " From: http://stackoverflow.com/questions/2679475/vim-script-to-compile-tex-source-and-launch-pdf-only-if-no-errors
     " If your shell is bash, you can use the ${PIPESTATUS} array variable to get
     " the correct exit code (borrowed from this answer to another question).
-    silent setlocal shell=bash
-    silent setlocal shellpipe=2>&1\ \|\ tee\ %s;exit\ \${PIPESTATUS[0]}
+    " Local: I changed the shell to zsh because fuck bash
+    silent setlocal shell=zsh
+    silent setlocal shellpipe=2>&1\ \|\ tee\ %s;exit\ \${pipestatus[1]}
 
     let success = 1
     call setqflist([]) " clear quickfix
