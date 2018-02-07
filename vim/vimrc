@@ -55,6 +55,9 @@ let g:airline_symbols.linenr = '¶'
 let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_symbols.maxlinenr = ''
 
+" disable conceal for pandoc
+let g:pandoc#syntax#conceal#use = 0
+
 
 if has('gui_running')
 "    set guifont=Source\ Code\ Pro\ Medium\ 10
