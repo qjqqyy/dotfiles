@@ -3,7 +3,7 @@
 zmodload zsh/datetime || return
 autoload -Uz add-zsh-hook || return
 zbell_duration=15
-zbell_ignore=($EDITOR vi $PAGER tmux firefox chrome chromium \
+zbell_ignore=($EDITOR vi vim nvim $PAGER tmux firefox chrome chromium \
     man less weechat mpv ncmpcpp alsamixer top htop)
 zbell_timestamp=$EPOCHSECONDS
 
