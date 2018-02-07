@@ -10,7 +10,12 @@ HISTSIZE=5000
 SAVEHIST=$HISTSIZE
 KEYTIMEOUT=2
 
-if hash vim > /dev/null 2>&1; then
+if hash nvim > /dev/null 2>&1; then
+  EDITOR='nvim'
+  VISUAL='nvim'
+  alias vi=nvim
+  alias vim=nvim
+elif hash vim > /dev/null 2>&1; then
   EDITOR='vim'
   VISUAL='vim'
   alias vi=vim
@@ -21,6 +26,10 @@ if [[ -x $HOME/.vim/bundle/vimpager/vimpager ]]; then
   export GIT_PAGER=less
   PAGER=$HOME/.vim/bundle/vimpager/vimpager
   alias less=$PAGER
+  # workaround because nvim doesn't work with vimpager for some reason
+  if [[ "nvim" = $EDITOR ]]; then
+    export VIMPAGER_VIM=vim
+  fi
 elif hash less > /dev/null 2>&1; then
   PAGER=${PAGER:-less}
 fi

@@ -12,4 +12,8 @@ ln -s $DIR/zsh/zshrc $HOME/.zshrc
 [ -e $HOME/.tmux.conf ]	&& mv $HOME/.tmux.conf	$HOME/.tmux.conf.BAK
 ln -s $DIR/tmux.conf $HOME/.tmux.conf
 
+mkdir -p $HOME/.config/nvim/
+[ -e $HOME/.config/nvim/init.vim ] && mv $HOME/.config/nvim/init.vim $HOME/.config/nvim/init.vim.BAK
+ln -s $DIR/init.vim $HOME/.config/nvim/init.vim
+
 echo "=> You might want to \`git submodule update --init'"

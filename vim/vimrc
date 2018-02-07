@@ -72,3 +72,6 @@ endif
 
 " \r to make
 noremap <buffer> <silent> <Leader>r <Esc>:make<CR>
+
+" man.vim related
+runtime ftplugin/man.vim
