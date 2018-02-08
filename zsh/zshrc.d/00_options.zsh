@@ -26,10 +26,6 @@ if [[ -x $HOME/.vim/bundle/vimpager/vimpager ]]; then
   export GIT_PAGER=less
   PAGER=$HOME/.vim/bundle/vimpager/vimpager
   alias less=$PAGER
-  # workaround because nvim doesn't work with vimpager for some reason
-  if [[ "nvim" = $EDITOR ]]; then
-    export VIMPAGER_VIM=vim
-  fi
 elif hash less > /dev/null 2>&1; then
   PAGER=${PAGER:-less}
 fi
