@@ -1,4 +1,9 @@
 " vim: set filetype=vim :
+if has('nvim')
+    set runtimepath^=~/.vim runtimepath+=~/.vim/after
+    let &packpath = &runtimepath
+    au VimLeave * set guicursor=a:hor25-blinkon1
+endif
 source ~/.vim/vimrc
 set nonumber
 set nocursorline
