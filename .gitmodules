@@ -13,3 +13,6 @@
 [submodule "vim/bundle/vim-pandoc"]
 	path = vim/bundle/vim-pandoc
 	url = https://github.com/vim-pandoc/vim-pandoc.git
+[submodule "vim/bundle/neomake"]
+	path = vim/bundle/neomake
+	url = https://github.com/neomake/neomake.git
