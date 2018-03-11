@@ -32,13 +32,15 @@ au FileType pl,perl,perl6 setlocal sw=4 sts=4 et
 au FileType zsh setlocal sw=2 sts=2 et
 au FileType tex setlocal sw=4 sts=4 et cc=0
 " autocompile tex on :w
-let g:tex_pdf_map_keys = 0
-au FileType tex autocmd BufWritePost * BuildTexPdf
+"let g:tex_pdf_map_keys = 0
+"au FileType tex autocmd BufWritePost * BuildTexPdf
+au FileType tex autocmd BufWritePost * Neomake!
 au FileType haskell,lhaskell setlocal sw=2 sts=2 et cc=0
 
 let g:pandoc#modules#disabled = ["folding"]
 au FileType pandoc setlocal sw=4 sts=4 et cc=0
 au FileType pandoc autocmd BufWritePost * Neomake!
+au FileType pandoc silent! call airline#extensions#whitespace#disable()
 
 let lhs_markup='tex'
 
