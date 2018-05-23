@@ -6,6 +6,10 @@ set shortmess+=I
 execute pathogen#infect()
 syntax enable
 set backspace=indent,eol,start
+"
+"return and space for :noh
+nnoremap <CR> :nohlsearch<CR><CR>
+"nnoremap <Space> :nohlsearch<CR>
 
 "set foldcolumn=2 foldmethod=syntax foldlevel=99 foldenable
 
