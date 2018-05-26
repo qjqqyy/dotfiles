@@ -16,8 +16,10 @@ clipboard() {
   fi
   $clip
 }
-sprunge() {
-  cat $* | curl -sSf -F 'sprunge=<-' http://sprunge.us | clipboard
+hastebin() {
+  cat $* \
+      | curl -sSf --data-binary '@-' https://hastebin.com/documents \
+      | sed 's_^{"key":"_https://hastebin.com/_;s/"}$//'
 }
 0x0() {
   curl -sSf -F"file=@$1" https://0x0.st | clipboard
