@@ -22,15 +22,15 @@ elif hash vim > /dev/null 2>&1; then
 else
   EDITOR='vi'
 fi
-if [[ -x $HOME/.vim/bundle/vimpager/vimpager ]]; then
+if [[ -x $HOME/.vim/plug/vimpager/vimpager ]]; then
   export GIT_PAGER=less
-  PAGER=$HOME/.vim/bundle/vimpager/vimpager
+  PAGER=$HOME/.vim/plug/vimpager/vimpager
   alias less=$PAGER
 elif hash less > /dev/null 2>&1; then
   PAGER=${PAGER:-less}
 fi
-if [[ -x $HOME/.vim/bundle/vimpager/vimcat ]]; then
-  READNULLCMD=$HOME/.vim/bundle/vimpager/vimcat
+if [[ -x $HOME/.vim/plug/vimpager/vimcat ]]; then
+  READNULLCMD=$HOME/.vim/plug/vimpager/vimcat
   alias vimcat=$READNULLCMD
 fi
 if hash doas > /dev/null 2>&1; then

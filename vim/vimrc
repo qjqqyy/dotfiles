@@ -3,7 +3,17 @@ set incsearch ignorecase smartcase hlsearch
 set title
 set shortmess+=I
 "set breakindent
-execute pathogen#infect()
+
+" plugins
+call plug#begin('~/.vim/plug/')
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'rkitover/vimpager'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'pandoc' }
+Plug 'neomake/neomake'
+call plug#end()
+
 syntax enable
 set backspace=indent,eol,start
 "
