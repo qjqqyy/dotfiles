@@ -6,6 +6,7 @@ set shortmess+=I
 
 " plugins
 call plug#begin('~/.vim/plug/')
+Plug 'chriskempson/base16-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rkitover/vimpager'
