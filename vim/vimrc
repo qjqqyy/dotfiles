@@ -34,7 +34,7 @@ else
     set nomodeline viminfo=
 endif
 
-colorscheme base16-monokai
+colorscheme base16-default-light
 set cursorline
 
 set t_Co=16
@@ -57,7 +57,7 @@ au FileType pandoc setlocal sw=4 sts=4 et cc=0
 au FileType pandoc autocmd BufWritePost * Neomake!
 au FileType pandoc silent! call airline#extensions#whitespace#disable()
 
-let g:airline_theme='base16_monokai'
+let g:airline_theme='base16'
 let g:airline_powerline_fonts=0
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
