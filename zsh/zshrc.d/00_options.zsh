@@ -30,6 +30,7 @@ elif hash less > /dev/null 2>&1; then
   PAGER=${PAGER:-less}
 fi
 if [[ -x $HOME/.vim/plug/vimpager/vimcat ]]; then
+  READNULLCMD=$HOME/.vim/plug/vimpager/vimcat
   alias vimcat=$READNULLCMD
 fi
 if hash doas > /dev/null 2>&1; then
