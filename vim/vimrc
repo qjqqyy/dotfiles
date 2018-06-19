@@ -43,6 +43,7 @@ filetype plugin indent on
 
 au FileType c,h setlocal cindent
 au FileType java setlocal sw=4 sts=4 et
+au FileType java abbreviate main public static void main(String[] args)
 au FileType javascript setlocal sw=4 sts=4 et
 au FileType pl,perl setlocal sw=4 sts=4 et
 au FileType sh,bash,zsh setlocal sw=2 sts=2 et
@@ -51,7 +52,7 @@ au FileType tex setlocal sw=4 sts=4 et cc=0
 "let g:tex_pdf_map_keys = 0
 "au FileType tex autocmd BufWritePost * BuildTexPdf
 "au FileType tex autocmd BufWritePost * Neomake!
-au FileType haskell setlocal sw=2 sts=2 et cc=0
+au FileType haskell setlocal sw=4 sts=4 et " cc=0
 
 let g:pandoc#modules#disabled = ["folding"]
 au FileType pandoc setlocal sw=4 sts=4 et cc=0
