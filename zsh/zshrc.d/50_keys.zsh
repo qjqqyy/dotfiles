@@ -42,3 +42,4 @@ bindkey -a u undo
 bindkey -a '^R' redo
 bindkey '^?' backward-delete-char
 bindkey '^H' backward-delete-char
+bindkey '^A' beginning-of-line
