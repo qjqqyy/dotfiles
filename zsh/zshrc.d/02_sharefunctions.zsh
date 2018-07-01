@@ -19,7 +19,8 @@ clipboard() {
 hastebin() {
   cat $* \
       | curl -sSf --data-binary '@-' https://hastebin.com/documents \
-      | sed 's_^{"key":"_https://hastebin.com/_;s/"}$//'
+      | sed 's_^{"key":"_https://hastebin.com/_;s/"}$//' \
+      | clipboard
 }
 0x0() {
   curl -sSf -F"file=@$1" https://0x0.st | clipboard
