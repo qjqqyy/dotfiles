@@ -13,6 +13,7 @@ Plug 'rkitover/vimpager'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'neomake/neomake'
+Plug 'neovimhaskell/haskell-vim'
 call plug#end()
 
 syntax enable
@@ -78,7 +79,6 @@ let g:airline_symbols.maxlinenr = ''
 
 " disable conceal for pandoc
 let g:pandoc#syntax#conceal#use = 0
-
 
 if has('gui_running')
 "    set guifont=Source\ Code\ Pro\ Medium\ 10
