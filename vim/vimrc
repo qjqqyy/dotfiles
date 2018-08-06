@@ -14,6 +14,7 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim'
+Plug 'idris-hackers/idris-vim'
 call plug#end()
 
 syntax enable
