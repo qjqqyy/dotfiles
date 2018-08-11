@@ -2,11 +2,11 @@
 # pastes & uploads
 clipboard() {
   if [[ ! -z $DISPLAY ]]; then
-    if hash pbcopy > /dev/null 2>&1; then
+    if hash pbcopy &>/dev/null; then
       clip=pbcopy
-    elif hash xclip > /dev/null 2>&1; then
+    elif hash xclip &>/dev/null; then
       clip=xclip
-    elif hash xsel > /dev/null 2>&1; then
+    elif hash xsel &>/dev/null; then
       clip=xsel
     else
       clip=cat
