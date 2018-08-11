@@ -44,6 +44,7 @@ filetype plugin indent on
 
 
 au FileType c,h setlocal cindent
+au FileType cpp setlocal sw=4 ts=4 noet
 au FileType java setlocal sw=4 sts=4 et
 au FileType java abbreviate psvm public static void main(String[] args)
 au FileType java abbreviate Kattio Kattio io = new Kattio(System.in, System.out)
