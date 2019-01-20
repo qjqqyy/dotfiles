@@ -14,7 +14,8 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 Plug 'neomake/neomake'
 Plug 'neovimhaskell/haskell-vim'
-Plug 'idris-hackers/idris-vim'
+"Plug 'idris-hackers/idris-vim'
+Plug 'lervag/vimtex'
 call plug#end()
 
 syntax enable
@@ -57,7 +58,7 @@ au FileType tex setlocal sw=4 sts=4 et cc=0
 " autocompile tex on :w
 "let g:tex_pdf_map_keys = 0
 "au FileType tex autocmd BufWritePost * BuildTexPdf
-"au FileType tex autocmd BufWritePost * Neomake!
+au FileType tex autocmd BufWritePost * Neomake!
 au FileType haskell setlocal sw=4 sts=4 et " cc=0
 
 let g:pandoc#modules#disabled = ["folding"]
