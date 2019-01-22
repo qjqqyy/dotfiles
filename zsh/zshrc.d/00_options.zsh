@@ -22,7 +22,7 @@ elif hash vim &>/dev/null; then
 else
   EDITOR='vi'
 fi
-if [[ -x $HOME/.vim/plug/vimpager/vimpager ]]; then
+if [[ -z "$PAGER" && -x $HOME/.vim/plug/vimpager/vimpager ]]; then
   export GIT_PAGER=less
   PAGER=$HOME/.vim/plug/vimpager/vimpager
   alias less=$PAGER
