@@ -37,6 +37,7 @@ else
     set nomodeline viminfo=
 endif
 
+set background=light
 colorscheme base16-default-light
 set cursorline
 
