@@ -10,12 +10,12 @@ HISTSIZE=5000
 SAVEHIST=$HISTSIZE
 KEYTIMEOUT=2
 
-if hash nvim &>/dev/null; then
+if (( $+commands[nvim] )); then
   EDITOR='nvim'
   VISUAL='nvim'
   alias vi=nvim
   alias vim=nvim
-elif hash vim &>/dev/null; then
+elif (( $+commands[vim] )); then
   EDITOR='vim'
   VISUAL='vim'
   alias vi=vim
@@ -26,14 +26,14 @@ if [[ -z "$PAGER" && -x $HOME/.vim/plug/vimpager/vimpager ]]; then
   export GIT_PAGER=less
   PAGER=$HOME/.vim/plug/vimpager/vimpager
   alias less=$PAGER
-elif hash less &>/dev/null; then
+elif (( $+commands[less] )); then
   PAGER=${PAGER:-less}
 fi
 if [[ -x $HOME/.vim/plug/vimpager/vimcat ]]; then
   READNULLCMD=$HOME/.vim/plug/vimpager/vimcat
   alias vimcat=$READNULLCMD
 fi
-if hash doas &>/dev/null; then
+if (( $+commands[doas] )); then
   alias sudo='doas'
 fi
 

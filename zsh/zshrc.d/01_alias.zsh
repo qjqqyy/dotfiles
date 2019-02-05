@@ -33,7 +33,7 @@ case $OSTYPE in
     alias mv="nocorrect noglob mv ${_mv_flags[modern]}"
     ;;
   solaris*|openbsd*)
-    if hash gls &>/dev/null && hash gcp &>/dev/null && hash gmv &>/dev/null && hash grm &>/dev/null; then
+    if (( $+commands[gls] )) && (( $+commands[gcp] )) && (( $+commands[gmv] )) && (( $+commands[grm] )); then
       alias ls="gls ${_ls_flags[gnu]}"
       alias cp="gcp ${_cp_flags[modern]}"
       alias rm="nocorrect noglob grm ${_rm_flags[gnu]}"
@@ -54,7 +54,7 @@ alias lah='lla -h'
 alias :q='exit'
 alias /quit='exit'
 if [[ $OSTYPE =~ (openbsd|solaris) ]]; then
-  if hash ggrep &>/dev/null; then
+  if (( $+commands[ggrep] )); then
     alias grep='ggrep -i --color=auto -d skip'
   else
     alias grep='grep -i'
