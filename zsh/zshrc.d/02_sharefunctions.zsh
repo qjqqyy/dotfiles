@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 # pastes & uploads
 clipboard() {
-  if [[ ! -z $DISPLAY ]]; then
+  if (( $+commands[clip.exe] )); then
+    clip=clip.exe
+  elif [[ ! -z $DISPLAY ]]; then
     if (( $+commands[pbcopy] )); then
       clip=pbcopy
     elif (( $+commands[xclip] )); then
