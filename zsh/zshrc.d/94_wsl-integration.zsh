@@ -9,9 +9,12 @@ if (( $+commands[powershell.exe] )); then
   _windows_username=$(powershell.exe '$env:UserName')
   # dir bookmark
   hash -d -- winhome="/mnt/c/Users/${_windows_username//$'\r'}"
-
   # suffix alias for .bat files
   alias -s bat='cmd.exe /c'
+
+  if (( $+commands[mpv.com] )); then
+    alias mpv=mpv.com
+  fi
 
   unset _windows_username
 fi
