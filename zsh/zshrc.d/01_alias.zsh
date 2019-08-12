@@ -53,7 +53,7 @@ alias lh='ll -h'
 alias lah='lla -h'
 alias :q='exit'
 alias /quit='exit'
-if [[ $OSTYPE =~ (openbsd|solaris) ]]; then
+if [[ $OSTYPE =~ (openbsd|solaris|linux-musl) ]]; then
   if (( $+commands[ggrep] )); then
     alias grep='ggrep -i --color=auto -d skip'
   else
@@ -63,7 +63,6 @@ else
   alias grep='grep -i --color=auto -d skip'
 fi
 alias df='df -h'
-[[ $OSTYPE =~ linux ]] && alias free='free -m'
 alias git='nocorrect noglob git'
 # force mouse off
 alias mousereset=" printf '\033[?1002l'"
