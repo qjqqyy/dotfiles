@@ -1,35 +1,38 @@
+# path of . relative to $HOME
+DOTPATH ?= .dotfiles
 
 .PHONY: zsh
 zsh: ~/.zsh ~/.zshrc
 
-~/.zsh: zsh/
-	ln -srf $< $@
+~/.zsh:
+	ln -sf $(DOTPATH)/zsh $@
 
-~/.zshrc: ~/.zsh/zshrc
-	ln -srf $< $@
+~/.zshrc: ~/.zsh
+	ln -sf .zsh/zshrc $@
 
 .PHONY: vim
 vim: ~/.vim
 
-~/.vim: vim/
-	ln -srf $< $@
+~/.vim:
+	ln -sf $(DOTPATH)/vim $@
 
 .PHONY: nvim
 nvim: ~/.config/nvim/init.vim
 
 ~/.config/nvim/init.vim: init.vim
 	mkdir -p $(dir $@)
-	ln -srf $< $@
+	ln -sf ../../$(DOTPATH)/$< $@
 
 .PHONY: tmux
 tmux: ~/.tmux.conf
 
 ~/.tmux.conf: tmux.conf
-	ln -srf $< $@
+	ln -sf $(DOTPATH)/$< $@
 
 .PHONY: git
 git: ~/.config/git/config
 
 ~/.config/git/config: gitconfig
-	install -D -m644 $< $@
+	mkdir -p $(dir $@)
+	install -m644 $< $@
 
