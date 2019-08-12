@@ -1,0 +1,5 @@
+[user]
+	email = qjqqyy@gmail.com
+	name = Qi Ji
+[alias]
+        lg = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(12)(%ar)%C(reset) %C(magenta)%G?%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(12)- %an%C(reset)' --all
