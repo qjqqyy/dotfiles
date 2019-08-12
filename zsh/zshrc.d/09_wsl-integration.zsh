@@ -17,4 +17,9 @@ if (( $+commands[powershell.exe] )); then
   fi
 
   unset _windows_username
+
+  # workaround wsl gripes
+  umask 022
+  skip_global_compinit=1 # stupid ubuntu default
+  SHELL=/bin/zsh
 fi
