@@ -1,32 +1,25 @@
 # Aliases
 typeset -A _ls_flags _rm_flags _mv_flags _cp_flags
 _ls_flags[gnu]='-FH --group-directories-first --color=auto'
-_rm_flags[gnu]='-Iv --one-file-system'
 _ls_flags[freebsd]='-FHG'
-_rm_flags[freebsd]='-iv'
-_ls_flags[darwin]='-FHG'
-_rm_flags[darwin]='-iv'
 _ls_flags[compat]='-FH'
+_rm_flags[gnu]='-Iv --one-file-system'
+_rm_flags[freebsd]='-iv'
 _rm_flags[compat]='-i'
 _mv_flags[modern]='-iv'
-_cp_flags[modern]='-ipv'
 _mv_flags[compat]='-i'
+_cp_flags[modern]='-ipv'
 _cp_flags[compat]='-ip'
 
 case $OSTYPE in
   *gnu|*linux*)
     alias ls="ls ${_ls_flags[gnu]}"
     alias cp="cp ${_cp_flags[modern]}"
-    alias rm="nocorrect noglob rm ${_rm_flags[gnu]}"
+    [[ $OSTYPE =~ musl ]] && alias rm="nocorrect noglob rm ${_rm_flags[freebsd]}"\
+                          || alias rm="nocorrect noglob rm ${_rm_flags[gnu]}"
     alias mv="nocorrect noglob mv ${_mv_flags[modern]}"
     ;;
-  *darwin*)
-    alias ls="ls ${_ls_flags[darwin]}"
-    alias cp="cp ${_cp_flags[modern]}"
-    alias rm="nocorrect noglob rm ${_rm_flags[darwin]}"
-    alias mv="nocorrect noglob mv ${_mv_flags[modern]}"
-    ;;
-  freebsd*)
+  *darwin*|freebsd*)
     alias ls="ls ${_ls_flags[freebsd]}"
     alias cp="cp ${_cp_flags[modern]}"
     alias rm="nocorrect noglob rm ${_rm_flags[freebsd]}"
