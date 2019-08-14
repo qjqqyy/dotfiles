@@ -20,5 +20,6 @@ Session.vim
 *~
 
 # let vim-plug manage its own git repo
+# and autoinstalling vim-plug in vimrc
 /vim/plug
-/vim/autoload/plug.vim.old
+/vim/autoload
