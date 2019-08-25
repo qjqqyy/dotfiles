@@ -3,10 +3,10 @@
 clipboard() {
   if (( $+commands[clip.exe] )); then
     clip=clip.exe
+  elif (( $+commands[pbcopy] )); then
+    clip=pbcopy
   elif [[ ! -z $DISPLAY ]]; then
-    if (( $+commands[pbcopy] )); then
-      clip=pbcopy
-    elif (( $+commands[xclip] )); then
+    if (( $+commands[xclip] )); then
       clip=xclip
     elif (( $+commands[xsel] )); then
       clip=xsel
