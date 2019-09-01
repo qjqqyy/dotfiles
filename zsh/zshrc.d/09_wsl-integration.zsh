@@ -7,13 +7,18 @@ if (( $+commands[powershell.exe] )); then
   fi
 
   _windows_username=$(powershell.exe '$env:UserName')
+  _windows_username="${_windows_username//$'\r'}"
   # dir bookmark
-  hash -d -- winhome="/mnt/c/Users/${_windows_username//$'\r'}"
+  hash -d -- winhome="/mnt/c/Users/$_windows_username"
   # suffix alias for .bat files
   alias -s bat='cmd.exe /c'
 
   if (( $+commands[mpv.com] )); then
     alias mpv=mpv.com
+  fi
+
+  if [[ -d "/mnt/c/Users/$_windows_username/iCloudDrive" ]]; then
+    hash -d -- iCloud="/mnt/c/Users/$_windows_username/iCloudDrive"
   fi
 
   unset _windows_username
