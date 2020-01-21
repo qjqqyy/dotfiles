@@ -23,8 +23,8 @@ delKeys XConfig {modMask = modm} =
     , (modm,               xK_h     ) -- shrinking and expanding master
     , (modm,               xK_l     )
     ] ++
-    -- rebind move client to workspace to follow it along
-    [ (modm .|. shiftMask, k) | k <- [xK_1 .. xK_9] ]
+    -- rebind workspaces
+    [ (modm .|. m, k) | m <- [shiftMask, 0], k <- [xK_1 .. xK_9] ]
 
 insKeys :: XConfig l -> [((KeyMask, KeySym), X ())]
 insKeys conf@(XConfig {modMask = modm}) =
@@ -40,7 +40,9 @@ insKeys conf@(XConfig {modMask = modm}) =
     , ((modm,               xK_l     ), sendMessage Shrink)
     ] ++
     -- move workspace to client then follow along
-    [ ((modm .|. shiftMask, k), windows $ W.greedyView i . W.shift i) |
+    [((modm .|. shiftMask, k), windows $ W.greedyView i . W.shift i) |
+        (i, k) <- zip (workspaces conf) [xK_1 .. xK_9]] ++
+    [((modm, k), toggleOrView i) |
         (i, k) <- zip (workspaces conf) [xK_1 .. xK_9]]
 
 myLayout = (reflectHoriz tiled) ||| Full
