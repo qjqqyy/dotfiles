@@ -5,6 +5,7 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Reflect
 import XMonad.Util.CustomKeys
 import XMonad.Util.Run
 
@@ -19,21 +20,35 @@ delKeys XConfig {modMask = modm} =
     , (modm,               xK_p     ) -- dmenu
     , (modm .|. shiftMask, xK_p     ) -- gmrun
     , (modm .|. shiftMask, xK_c     ) -- close focused window
+    , (modm,               xK_h     ) -- shrinking and expanding master
+    , (modm,               xK_l     )
     ] ++
     -- rebind move client to workspace to follow it along
     [ (modm .|. shiftMask, k) | k <- [xK_1 .. xK_9] ]
 
 insKeys :: XConfig l -> [((KeyMask, KeySym), X ())]
 insKeys conf@(XConfig {modMask = modm}) =
-    [ ((modm, xK_Return), spawn $ terminal conf)
-    , ((modm, xK_slash), toggleWS)
-    , ((modm .|. shiftMask, xK_q), kill) -- close focused window
-    , ((modm .|. shiftMask, xK_x), io (exitWith ExitSuccess)) -- rebind quit
-    , ((mod1Mask, xK_F2), spawn "dmenu_run -fn 'Latin Modern Mono-12'")
+    [ ((modm,               xK_Return), spawn $ terminal conf)
+    -- back and forth
+    , ((modm,               xK_slash ), toggleWS)
+    -- rebind quit
+    , ((modm .|. shiftMask, xK_q     ), kill) -- close focused window
+    , ((modm .|. shiftMask, xK_x     ), io (exitWith ExitSuccess))
+    , ((mod1Mask,           xK_F2    ), spawn "dmenu_run -fn 'Latin Modern Mono-12'")
+    -- invert binds for shrinking and expanding master
+    , ((modm,               xK_h     ), sendMessage Expand)
+    , ((modm,               xK_l     ), sendMessage Shrink)
     ] ++
     -- move workspace to client then follow along
     [ ((modm .|. shiftMask, k), windows $ W.greedyView i . W.shift i) |
         (i, k) <- zip (workspaces conf) [xK_1 .. xK_9]]
+
+myLayout = (reflectHoriz tiled) ||| Full
+  where
+     tiled   = Tall nmaster delta ratio
+     nmaster = 1
+     ratio   = 1/2
+     delta   = 3/100
 
 main :: IO ()
 main = do
@@ -46,7 +61,7 @@ main = do
         , focusedBorderColor = "#4527f2"
         , workspaces = wsNames
         -- fixups for docks
-        , layoutHook = smartBorders . avoidStruts $ layoutHook def
+        , layoutHook = smartBorders . avoidStruts $ myLayout
         , manageHook = manageDocks <+> manageHook def
         -- bar
         , logHook = dynamicLogWithPP $ def
@@ -58,7 +73,7 @@ main = do
             , ppHidden  = barWsName "#4c114e"
             , ppSep = "  "
             , ppWsSep = ""
-            , ppLayout = const "" -- TODO: fix after customising layouts
+            , ppLayout = const ""
             }
         }
   where
