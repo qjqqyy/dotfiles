@@ -8,6 +8,8 @@ import XMonad.Layout.NoBorders
 import XMonad.Util.CustomKeys
 import XMonad.Util.Run
 
+import qualified XMonad.StackSet as W
+
 wsNames = ["壹", "貳", "參", "肆", "伍", "陸", "柒", "捌", "玖"]
 
 -- keybinds
@@ -17,7 +19,9 @@ delKeys XConfig {modMask = modm} =
     , (modm,               xK_p     ) -- dmenu
     , (modm .|. shiftMask, xK_p     ) -- gmrun
     , (modm .|. shiftMask, xK_c     ) -- close focused window
-    ]
+    ] ++
+    -- rebind move client to workspace to follow it along
+    [ (modm .|. shiftMask, k) | k <- [xK_1 .. xK_9] ]
 
 insKeys :: XConfig l -> [((KeyMask, KeySym), X ())]
 insKeys conf@(XConfig {modMask = modm}) =
@@ -26,7 +30,10 @@ insKeys conf@(XConfig {modMask = modm}) =
     , ((modm .|. shiftMask, xK_q), kill) -- close focused window
     , ((modm .|. shiftMask, xK_x), io (exitWith ExitSuccess)) -- rebind quit
     , ((mod1Mask, xK_F2), spawn "dmenu_run -fn 'Latin Modern Mono-12'")
-    ]
+    ] ++
+    -- move workspace to client then follow along
+    [ ((modm .|. shiftMask, k), windows $ W.greedyView i . W.shift i) |
+        (i, k) <- zip (workspaces conf) [xK_1 .. xK_9]]
 
 main :: IO ()
 main = do
