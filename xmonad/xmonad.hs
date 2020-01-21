@@ -4,6 +4,7 @@ import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Reflect
@@ -35,28 +36,32 @@ insKeys conf@(XConfig {modMask = modm}) =
     -- rebind quit
     , ((modm .|. shiftMask, xK_q     ), kill) -- close focused window
     , ((modm .|. shiftMask, xK_x     ), io (exitWith ExitSuccess))
-    , ((mod1Mask,           xK_F2    ), spawn "dmenu_run -fn 'Latin Modern Mono-12'")
     -- invert binds for shrinking and expanding master
     , ((modm,               xK_h     ), sendMessage Expand)
     , ((modm,               xK_l     ), sendMessage Shrink)
-    , ((controlMask .|. mod1Mask, xK_l), spawn "i3lock_wrapper")
-    , ((noModMask, xF86XK_MonBrightnessUp  ), spawn "brightnessctl set +10%")
-    , ((noModMask, xF86XK_MonBrightnessDown), spawn "brightnessctl set 10%-")
     ] ++
+    extraKeys ++
     -- move workspace to client then follow along
     [((modm .|. shiftMask, k), windows $ W.greedyView i . W.shift i) |
         (i, k) <- zip (workspaces conf) [xK_1 .. xK_9]] ++
     [((modm, k), toggleOrView i) |
         (i, k) <- zip (workspaces conf) [xK_1 .. xK_9]]
 
-myLayout = (reflectHoriz tiled) ||| Full
+extraKeys :: [((KeyMask, KeySym), X())]
+extraKeys =
+    [ ((mod1Mask,           xK_F2    ), spawn "dmenu_run -fn 'Latin Modern Mono-12'")
+    , ((controlMask .|. mod1Mask, xK_l), spawn "i3lock_wrapper")
+    , ((0,   xF86XK_MonBrightnessUp  ), spawn "brightnessctl set +10%")
+    , ((0,   xF86XK_MonBrightnessDown), spawn "brightnessctl set 10%-")
+    ]
+
+myLayout = (avoidStruts . reflectHoriz $ tiled) ||| Full
   where
      tiled   = Tall nmaster delta ratio
      nmaster = 1
      ratio   = 1/2
      delta   = 3/100
 
-main :: IO ()
 main = do
     xmobarPipe <- spawnPipe "xmobar -d"
     xmonad $ docks . withUrgencyHook NoUrgencyHook $ def
@@ -67,8 +72,13 @@ main = do
         , focusedBorderColor = "#4527f2"
         , workspaces = wsNames
         -- fixups for docks
-        , layoutHook = smartBorders . avoidStruts $ myLayout
-        , manageHook = manageDocks <+> manageHook def
+        , layoutHook = smartBorders myLayout
+        , manageHook = mconcat
+            [ isFullscreen --> doFullFloat
+            , manageDocks
+            , className =? "Firefox" --> doShift (wsNames !! 1)
+            , manageHook def
+            ]
         -- bar
         , logHook = dynamicLogWithPP $ def
             { ppOutput = hPutStrLn xmobarPipe
