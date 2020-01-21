@@ -38,6 +38,8 @@ insKeys conf@(XConfig {modMask = modm}) =
     -- invert binds for shrinking and expanding master
     , ((modm,               xK_h     ), sendMessage Expand)
     , ((modm,               xK_l     ), sendMessage Shrink)
+    -- screen lock
+    , ((controlMask .|. mod1Mask, xK_l), spawn "i3lock_wrapper")
     ] ++
     -- move workspace to client then follow along
     [((modm .|. shiftMask, k), windows $ W.greedyView i . W.shift i) |
