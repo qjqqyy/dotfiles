@@ -1,0 +1,12 @@
+-- vim: ft=haskell :
+Config { font = "xft:Noto Sans:pixelsize=24"
+       , additionalFonts = [ "xft:Droid Sans Fallback:pixelsize=24" ]
+       , bgColor = "#100013"
+       , fgColor = "#ccadcc"
+       , template = "%StdinReader% } { %battery% <fc=#ccadcc,#2a0834> %date% </fc>"
+       , commands =
+           [ Run StdinReader
+           , Run Date "%a %d %b <fc=#4c114e,#2a0834>|</fc> %H:%M" "date" 15
+           , Run Battery [] 100
+           ]
+       }

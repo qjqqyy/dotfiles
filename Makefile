@@ -36,3 +36,11 @@ git: ~/.config/git/config
 	mkdir -p $(dir $@)
 	install -m644 $< $@
 
+.PHONY: xmonad
+xmonad: ~/.xmonad/xmonad.hs ~/.xmobarrc
+
+~/.xmonad/xmonad.hs: xmonad/xmonad.hs
+	ln -sf ../$(DOTPATH)/$< $@
+
+~/.xmobarrc: xmonad/xmobarrc
+	ln -sf $(DOTPATH)/$< $@
