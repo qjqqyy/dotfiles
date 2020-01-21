@@ -1,3 +1,4 @@
+import Graphics.X11.ExtraTypes.XF86
 import System.Exit
 import XMonad
 import XMonad.Actions.CycleWS
@@ -20,8 +21,8 @@ delKeys XConfig {modMask = modm} =
     , (modm,               xK_p     ) -- dmenu
     , (modm .|. shiftMask, xK_p     ) -- gmrun
     , (modm .|. shiftMask, xK_c     ) -- close focused window
-    , (modm,               xK_h     ) -- shrinking and expanding master
-    , (modm,               xK_l     )
+    , (modm,               xK_h     ) -- shrink master
+    , (modm,               xK_l     ) -- expand master
     ] ++
     -- rebind workspaces
     [ (modm .|. m, k) | m <- [shiftMask, 0], k <- [xK_1 .. xK_9] ]
@@ -38,8 +39,9 @@ insKeys conf@(XConfig {modMask = modm}) =
     -- invert binds for shrinking and expanding master
     , ((modm,               xK_h     ), sendMessage Expand)
     , ((modm,               xK_l     ), sendMessage Shrink)
-    -- screen lock
     , ((controlMask .|. mod1Mask, xK_l), spawn "i3lock_wrapper")
+    , ((noModMask, xF86XK_MonBrightnessUp  ), spawn "brightnessctl set +10%")
+    , ((noModMask, xF86XK_MonBrightnessDown), spawn "brightnessctl set 10%-")
     ] ++
     -- move workspace to client then follow along
     [((modm .|. shiftMask, k), windows $ W.greedyView i . W.shift i) |
