@@ -21,20 +21,20 @@ nvim: ~/.config/nvim/init.vim
 
 ~/.config/nvim/init.vim: init.vim
 	mkdir -p ~/.config/nvim
-	ln -sf ../../$(DOTPATH)/$< $@
+	ln -sf ../../$(DOTPATH)/init.vim $@
 
 .PHONY: tmux
 tmux: ~/.tmux.conf
 
 ~/.tmux.conf: tmux.conf
-	ln -sf $(DOTPATH)/$< $@
+	ln -sf $(DOTPATH)/tmux.conf $@
 
 .PHONY: git
 git: ~/.config/git/config
 
 ~/.config/git/config: gitconfig
 	mkdir -p ~/.config/git
-	install -m644 $< $@
+	install -m644 gitconfig $@
 
 .PHONY: xmonad
 xmonad: ~/.xmonad/xmonad.hs ~/.xmobar/xmobar.hs ~/bin/i3lock_wrapper
