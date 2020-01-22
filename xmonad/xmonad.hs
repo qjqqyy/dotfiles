@@ -66,7 +66,7 @@ main = do
     xmobarPipe <- spawnPipe "xmobar -d"
     xmonad $ docks . withUrgencyHook NoUrgencyHook $ def
         { modMask = mod4Mask
-        , terminal = "urxvt"
+        , terminal = "urxvtc"
         , keys = customKeys delKeys insKeys
         , normalBorderColor = "#2a0834"
         , focusedBorderColor = "#4527f2"
@@ -82,12 +82,12 @@ main = do
         -- bar
         , logHook = dynamicLogWithPP $ def
             { ppOutput = hPutStrLn xmobarPipe
-            , ppTitle = xmobarColor "#e5cece" "" . shorten 91
+            , ppTitle = (" <fn=2>\xf2d0</fn> " ++) . xmobarColor "#e5cece" "" . shorten 91
             , ppCurrent = barWsName "#9b0877"
             , ppVisible = barWsName "#637e35"
             , ppUrgent  = barWsName "#e122a4"
             , ppHidden  = barWsName "#4c114e"
-            , ppSep = "  "
+            , ppSep = " "
             , ppWsSep = ""
             , ppLayout = const ""
             }
