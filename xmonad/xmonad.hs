@@ -82,7 +82,7 @@ main = do
         -- bar
         , logHook = dynamicLogWithPP $ def
             { ppOutput = hPutStrLn xmobarPipe
-            , ppTitle = (" <fn=2>\xf2d0</fn> " ++) . xmobarColor "#e5cece" "" . shorten 91
+            , ppTitle = (wrap " <fn=2>\xf2d0</fn> " "") . xmobarColor "#e5cece" "" . shorten 91
             , ppCurrent = barWsName "#9b0877"
             , ppVisible = barWsName "#637e35"
             , ppUrgent  = barWsName "#e122a4"
