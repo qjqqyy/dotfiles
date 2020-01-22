@@ -1,0 +1,56 @@
+#!/bin/sh
+# status script for lemonbar
+# architecture:
+#       xprop and conky > $panel_fifo
+#	edit: replaced xprop polling with github.com/baskerville/xtitle
+#       parser polls panel_fifo and outputs lemonbar format
+#       lemonbar outputs to executor to execute lemonbar commands
+
+if [ -n "$(pgrep -f $0)" ]; then
+	printf '%s\n' "the status bar is already running." >&2
+	exit 1
+fi
+
+#trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+basedir=$(dirname $0)
+panel_fifo="${basedir}/panel_fifo"
+# check if its a symlink
+if [ ! -L "${panel_fifo}" ]; then
+	printf '%s\n' "${panel_fifo} is not a valid symbolic link" >&2
+	exit 1
+fi
+real_panel_fifo=$(readlink ${panel_fifo})
+[ -e "${real_panel_fifo}" ] && rm "${real_panel_fifo}"
+mkfifo -m 600 "${real_panel_fifo}"
+[ ! -p "${panel_fifo}" ] && exit 1
+
+## EVENTS
+# Window title, "WIN"
+#nice -n 5 xprop -spy -root _NET_ACTIVE_WINDOW | nice -n 10 sed -ln 's/.*window id # /WIN /p' > "${panel_fifo}" &
+nice -n 5 ${basedir}/xtitle -s -f 'WIN %s\n' > "${panel_fifo}" &
+# conky "SYS"
+nice -n 5 conky -c ${basedir}/conkyrc > "${panel_fifo}" &
+# running i3_workspaces from .i3/config with exec_always
+# modded it to quit on socket disconnection
+# 1 less subshell, great
+#while :; do
+#    # workspace "WSP"
+#    sleep 2
+#    [ -z "$(pgrep -u $USER -x i3)" ] && exit
+#    nice -n 4 ${basedir}/i3_workspaces.pl > "${panel_fifo}"
+#done &
+
+#cat $panel_fifo
+#        -f '-xos4-terminesspowerline-medium-*-normal-*-14-*-*-*-*-*-*-*' \
+nice -n 3 ${basedir}/parser \
+|   nice -n 1 lemonbar \
+        -f '-sgi-screen-medium-r-normal-*-14-*-*-*-*-*-*-*' \
+	-f '-wenquanyi-wenquanyi bitmap song-medium-r-normal-*-14-*-*-*-*-*-*-*' \
+        -f '-misc-icons-medium-r-normal-*-14-*-*-*-*-*-*-*' \
+        -B '#272822' -F '#f8f8f2' -a 12 \
+|   nice -n 9 ${basedir}/executor
+rm "${real_panel_fifo}"
+#kill 0
+wait
+#exit

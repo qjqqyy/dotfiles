@@ -1,0 +1,17 @@
+s/@base00/\\#272822/g
+s/@base01/\\#383830/g
+s/@base02/\\#49483e/g
+s/@base03/\\#75715e/g
+s/@base04/\\#a59f85/g
+s/@base05/\\#f8f8f2/g
+s/@base06/\\#f5f4f1/g
+s/@base07/\\#f9f8f5/g
+s/@red/\\#f92672/g
+s/@orange/\\#fd971f/g
+s/@yellow/\\#f4bf75/g
+s/@green/\\#a6e22e/g
+s/@cyan/\\#a1efe4/g
+s/@blue/\\#66d9fe/g
+s/@magenta/\\#ae81ff/g
+s/@brown/\\#cc6633/g
+s/<DELETE FOLLOWING BACKSLASH>\\//

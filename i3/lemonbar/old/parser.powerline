@@ -1,0 +1,143 @@
+#!/usr/bin/env perl
+use common::sense;
+
+# colours
+my %c = (
+     '00' => '#272822'
+    ,'01' => '#383830'
+    ,'02' => '#49483e'
+    ,'03' => '#75715e'
+    ,'04' => '#a59f85'
+    ,'05' => '#f8f8f2'
+    ,'06' => '#f5f4f1'
+    ,'07' => '#f9f8f5'
+    ,red    => '#f92672'
+    ,orange => '#fd971f'
+    ,yellow => '#f4bf75'
+    ,green  => '#a6e22e'
+    ,cyan   => '#a1efe4'
+    ,blue   => '#66d9fe'
+    ,magenta=> '#ae81ff'
+    ,brown  => '#cc6633'
+    ,'-'    => '-'
+);
+# glyphs
+my %g = (
+     l  => ''
+    ,ll => ''
+    ,r  => ''
+    ,rl => ''
+    ,batc => '' # charging
+    ,batf => '' # full
+    ,bath => '' # high
+    ,batl => '' # low
+    ,bate => '' # empty
+    ,mute => '  '
+    ,vol  => ''
+    ,ws => ''
+    ,win => ''
+    ,load => ''
+    ,wifi => ''
+    ,disk => ''
+    ,temp => ''
+    ,mem  => ''
+);
+sub tor { # change colour to right
+#   my ($bg,$fg) = @_;
+    "%{F$c{$_[0]}}$g{l}%{B$c{$_[0]} F$c{$_[1]}}";
+}
+my ($w,$status,$title) = ('','','');
+my $pre = "%{l B$c{yellow} F$c{'00'}} $g{ws} ";
+my $titlepre="%{F$c{orange}} $g{win} %{F$c{'02'} B-}$g{r}%{F$c{'06'}}  ";
+
+my $panel_fifo = ($0 =~ s|[^/]*$||r).'/panel_fifo';
+open(my $fifo,'<',$panel_fifo) || die "Failed to open: $!";
+$0 = sprintf "lemonstatus: parser (%s)", readlink($panel_fifo); # pretty $0
+$|=1;
+while(<$fifo>){
+    chomp;
+    my ($cmd,$args) = split / /,$_,2;
+    if ($cmd eq 'SYS') {
+        my($load,$space,$ip,$temp,$bat,$battime,$vol,$hwmute,$date,$time)
+            = split /\|/,$args,10;
+
+        # LOAD avg (1min)
+        $status = $load >= 3 ?
+                    &tor('red','00')
+                  : &tor('02','-');
+        $status .= " $g{load} $load ";
+        # disk
+        $status .= &tor('01','-');
+        $status .= " $g{disk} $space ";
+        # BATTERY TODO: states N/U
+        $bat =~ /^([CDFNEU]) \((.*)%\)$/;
+        if ($1 eq 'D') {      # discharging
+            if ($2 > 70) {
+                $status .= &tor('02','-');
+                $status .= " $g{bath}"
+            } else {
+                $status .= &tor('orange','00');
+                $status .= " $g{batl}"
+            }
+        } elsif ($1 eq 'C') { # charging
+            $status .= &tor('02',$2 >= 90 ? 'green' : 'orange');
+            $status .= " $g{batc}"
+        } elsif ($1 eq 'E') { # empty
+            $status .= &tor('red','00');
+            $status .= " $g{bate}"
+        } elsif ($1 eq 'F') { # full
+            $status .= &tor('02','green');
+            $status .= " $g{batf}"
+        }
+        $status .= " $2% ";
+        # BATTERY TIME
+        $status .= "$g{ll} $battime " if $battime;
+        # TEMP
+        $status .= $temp >= 45 ?
+                     &tor('red','00')
+                   : &tor('01','-');
+        $status .= " $g{temp} $temp°C ";
+        # NETWORK
+        if ($ip eq "No Address") {
+            $ip = "down";
+            $status .= &tor('red','00');
+        } else {
+            $status .= &tor('02','-');
+        }
+        $status .= " $g{wifi} $ip ";
+        # VOL
+        $vol = 0 if $hwmute;
+        $status .= "%{F$c{'01'}}$g{l}%{B$c{'01'} ";
+        $status .= $vol ? "F-} $g{vol}" : "F$c{'red'}} $g{mute}";
+        $status .= " $vol% ";
+        # DATE & TIME
+        $status .= &tor('green','00');
+        $status .= " $date ";
+        $status .= "%{F$c{'00'}}$g{ll}%{F$c{'00'} B$c{green}} $time ";
+    } elsif ($cmd eq 'WSP') {
+        # (FOC|ACT|URG)name
+        my $j = 'yellow';
+        $w = '';
+        for my $space(split / /,$args) {
+            if ($space =~ s/^FOC//){
+                $w.= "%{B$c{orange} F$c{$j}}$g{r}%{F$c{'00'}}";
+                $j = 'orange';
+            } elsif ($space =~ s/^INA//){
+                $w.= "%{B$c{yellow} F$c{$j}}$g{r}%{F$c{'00'}}";
+                $j = 'yellow';
+            } elsif ($space =~ s/^URG//){
+                $w.= "%{B$c{red} F$c{$j}}$g{r}%{F$c{'00'}}";
+                $j = 'red';
+            }
+            $w.= "%{A:to_wsp ";  # generate command
+            $w.= ($space =~ s/:/\\:/gr).":} ";     # escape :'s
+            $space =~ s/^[0-9]+://;     # strip workspace numbers a la i3bar
+            $w.= "$space %{A}";
+        }
+        $w.="%{B$c{'02'} F$c{$j}}$g{r}";
+    } elsif ($cmd eq 'WIN') {
+        $title = $args unless $title eq $args;
+    } else { print STDERR "parser: skipped $cmd $args\n" }
+
+    print $pre,$w,$titlepre,$title,"%{r}",$status,"%{B-}\n"
+}
