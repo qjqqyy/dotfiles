@@ -10,5 +10,5 @@ set laststatus=1
 set colorcolumn=0
 set viminfo=
 
-let vimpager_passthrough = 0
+"let vimpager_passthrough = 0
 let vimpager_scrolloff = 0
