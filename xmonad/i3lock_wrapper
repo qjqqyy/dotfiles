@@ -1,0 +1,21 @@
+#!/bin/bash
+set -eo pipefail
+if pgrep -x i3lock; then
+  exit 1
+fi
+
+imgdir=$(mktemp --tmpdir=$XDG_RUNTIME_DIR -d -t locker-XXXXXX)
+image=${imgdir}/${USER}_lock.png
+image_final=${imgdir}/${USER}_lock_blurred.png
+
+revert() {
+  xset dpms 600 600 600
+  rm -r "$imgdir"
+}
+
+trap revert HUP INT TERM
+maim --format=png "$image"
+ffmpeg -loglevel quiet -y -i "$image" -vf "gblur=sigma=24" "$image_final"
+xset dpms 5 5 5
+i3lock -n -e -i "$image_final"
+revert
