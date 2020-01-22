@@ -20,7 +20,7 @@ vim: ~/.vim
 nvim: ~/.config/nvim/init.vim
 
 ~/.config/nvim/init.vim: init.vim
-	mkdir -p $(dir $@)
+	mkdir -p ~/.config/nvim
 	ln -sf ../../$(DOTPATH)/$< $@
 
 .PHONY: tmux
@@ -33,7 +33,7 @@ tmux: ~/.tmux.conf
 git: ~/.config/git/config
 
 ~/.config/git/config: gitconfig
-	mkdir -p $(dir $@)
+	mkdir -p ~/.config/git
 	install -m644 $< $@
 
 .PHONY: xmonad
