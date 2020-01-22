@@ -76,6 +76,7 @@ main = do
         , manageHook = mconcat
             [ isFullscreen --> doFullFloat
             , manageDocks
+            , className =? "Firefox" <&&> appName =? "Places" --> doFloat
             , className =? "Firefox" --> doShift (wsNames !! 1)
             , manageHook def
             ]
