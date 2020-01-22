@@ -13,7 +13,7 @@ import XMonad.Util.Run
 
 import qualified XMonad.StackSet as W
 
-wsNames = ["壹", "貳", "參", "肆", "伍", "陸", "柒", "捌", "玖"]
+wsNames = ["壹", "貳", "參", "肆", "伍", "陸", "柒", "捌", "玖", "拾"]
 
 -- keybinds
 delKeys :: XConfig l -> [(KeyMask, KeySym)]
@@ -43,9 +43,9 @@ insKeys conf@(XConfig {modMask = modm}) =
     extraKeys ++
     -- move workspace to client then follow along
     [((modm .|. shiftMask, k), windows $ W.greedyView i . W.shift i) |
-        (i, k) <- zip (workspaces conf) [xK_1 .. xK_9]] ++
+        (i, k) <- zip (workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])] ++
     [((modm, k), toggleOrView i) |
-        (i, k) <- zip (workspaces conf) [xK_1 .. xK_9]]
+        (i, k) <- zip (workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])]
 
 extraKeys :: [((KeyMask, KeySym), X())]
 extraKeys =
