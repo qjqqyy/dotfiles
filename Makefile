@@ -1,3 +1,4 @@
+# WARNING: uses GNU make
 # path of . relative to $HOME
 DOTPATH ?= .dotfiles
 
@@ -20,21 +21,21 @@ vim: ~/.vim
 nvim: ~/.config/nvim/init.vim
 
 ~/.config/nvim/init.vim: init.vim
-	mkdir -p ~/.config/nvim
-	ln -sf ../../$(DOTPATH)/init.vim $@
+	mkdir -p $(dir $@)
+	ln -sf ../../$(DOTPATH)/$< $@
 
 .PHONY: tmux
 tmux: ~/.tmux.conf
 
 ~/.tmux.conf: tmux.conf
-	ln -sf $(DOTPATH)/tmux.conf $@
+	ln -sf $(DOTPATH)/$< $@
 
 .PHONY: git
 git: ~/.config/git/config
 
 ~/.config/git/config: gitconfig
-	mkdir -p ~/.config/git
-	install -m644 gitconfig $@
+	mkdir -p $(dir $@)
+	install -m644 $< $@
 
 .PHONY: xmonad
 xmonad: ~/.xmonad/xmonad.hs ~/.xmobar/xmobar.hs ~/bin/i3lock_wrapper
@@ -46,4 +47,4 @@ xmonad: ~/.xmonad/xmonad.hs ~/.xmobar/xmobar.hs ~/bin/i3lock_wrapper
 	ln -sf ../$(DOTPATH)/$< $@
 
 ~/bin/i3lock_wrapper: xmonad/i3lock_wrapper
-	install -m755 $< $@
+	install -m700 $< $@
