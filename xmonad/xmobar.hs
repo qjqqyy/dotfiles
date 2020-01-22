@@ -11,7 +11,7 @@ config = defaultConfig
     , textOffsets = [ -1, -5 ]
     , bgColor = base07
     , fgColor = base01
-    , template = "%StdinReader% } { " ++ alternate
+    , template = "%StdinReader% }{ " ++ alternate
         [ "%date%"
         , "%battery%"
         , "%wlan0wi%"
