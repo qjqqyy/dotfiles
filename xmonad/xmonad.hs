@@ -3,6 +3,7 @@ import System.Exit
 import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
@@ -65,23 +66,21 @@ myLayout = (avoidStruts . reflectHoriz $ tiled) ||| Full
 
 main = do
     xmobarPipe <- spawnPipe "xmobar -d"
-    xmonad $ docks . withUrgencyHook NoUrgencyHook $ def
+    xmonad $ docks . ewmh . withUrgencyHook NoUrgencyHook $ def
         { modMask = mod4Mask
         , terminal = "urxvtc"
         , keys = customKeys delKeys insKeys
         , normalBorderColor = "#2a0834"
         , focusedBorderColor = "#4527f2"
         , workspaces = wsNames
-        -- fixups for docks
         , layoutHook = smartBorders myLayout
+        , handleEventHook = handleEventHook def <> fullscreenEventHook
         , manageHook = mconcat
-            [ isFullscreen --> doFullFloat
-            , manageDocks
+            [ manageDocks
             , className =? "Firefox" <&&> appName =? "Places" --> doFloat
             , className =? "Firefox" --> doShift (wsNames !! 1)
             , manageHook def
             ]
-        -- bar
         , logHook = dynamicLogWithPP $ def
             { ppOutput = hPutStrLn xmobarPipe
             , ppTitle = (wrap " <fn=2>\xf2d0</fn> " "") . xmobarColor "#e5cece" "" . shorten 130
