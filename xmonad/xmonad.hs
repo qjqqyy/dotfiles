@@ -53,6 +53,7 @@ extraKeys =
     , ((controlMask .|. mod1Mask, xK_l), spawn "i3lock_wrapper")
     , ((0,   xF86XK_MonBrightnessUp  ), spawn "brightnessctl set +10%")
     , ((0,   xF86XK_MonBrightnessDown), spawn "brightnessctl set 10%-")
+    , ((controlMask,        xK_Print ), spawn "maim -s | xclip -selection clipboard -t image/png")
     ]
 
 myLayout = (avoidStruts . reflectHoriz $ tiled) ||| Full
