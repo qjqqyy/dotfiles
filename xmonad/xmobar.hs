@@ -2,6 +2,9 @@ import Data.List
 import Xmobar
 import XMonad.Hooks.DynamicLog hiding (xmobar)
 
+import System.Process
+import System.IO
+
 config :: Config
 config = defaultConfig
     { font = "xft:Fantasque Sans Mono:pixelsize=24"
@@ -15,6 +18,7 @@ config = defaultConfig
         [ "%date%"
         , "%battery%"
         , "%wlan0wi%"
+        , "%bluetooth%"
         , "%disku%"
         ]
     , commands =
@@ -32,6 +36,9 @@ config = defaultConfig
             [ "-t", faWifi ++ " <essid>"
             ] 100
         , Run $ DiskU [("/",  faDisk ++ " <free>")] [] 600
+        , Run $ Bluetooth
+            (xmobarColor green "" faBluetooth)
+            (xmobarColor base04 "" faBluetoothB) 100
         ]
     }
   where
@@ -42,6 +49,8 @@ config = defaultConfig
     faBatteryHalf = fa "\xf242"
     faWifi = fa "\xf1eb"
     faDisk = fa "\xf0a0"
+    faBluetooth = fa "\xf293"
+    faBluetoothB = fa "\xf294"
 
 main :: IO ()
 main = xmobar config
@@ -71,3 +80,24 @@ alternate = intercalate " " . reverse . zipWith ($) (cycle [w, id])
 -- almost invisible vertical bar
 (.|.) :: String -> String -> String
 a .|. b = a ++ xmobarColor base05 base06 "|" ++ b
+
+-- hacky bluetooth indicator
+data Bluetooth = Bluetooth String String Int deriving (Read, Show)
+
+instance Exec Bluetooth where
+    start (Bluetooth on off r) cb = go
+        where go = bluetooth on off cb >> tenthSeconds r >> go
+    alias _ = "bluetooth"
+
+bluetooth :: String -> String -> (String -> IO ()) -> IO ()
+bluetooth on off cb = do
+    (_, hstdout, _, _) <- runInteractiveCommand "bluetooth"
+    hSetBinaryMode hstdout False
+    replace <$> hGetLine hstdout
+        >>= cb
+  where
+    replace :: String -> String
+    replace str
+      | "on"  `isInfixOf` str   = on
+      | "off" `isInfixOf` str   = off
+      | otherwise               = "install tlp"
