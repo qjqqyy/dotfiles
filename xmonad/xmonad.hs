@@ -18,13 +18,17 @@ import qualified XMonad.StackSet as W
 extraKeys :: KeyMask -> [((KeyMask, KeySym), X())]
 extraKeys modm = map (second spawn) $
     [ ((controlMask .|. mod1Mask, xK_l), "i3lock_wrapper")
-    , ((0,   xF86XK_MonBrightnessUp  ), "brightnessctl set +10%")
-    , ((0,   xF86XK_MonBrightnessDown), "brightnessctl set 10%-")
     , ((controlMask,        xK_Print ), "maim -s | xclip -selection clipboard -t image/png")
     , ((mod1Mask,           xK_F2    ), "rofi -show run")
     , ((modm .|. shiftMask, xK_Return), "rofi -show ssh")
     , ((mod1Mask,           xK_space ), "rofi -show drun")
     , ((mod1Mask,           xK_Tab   ), "rofi -show window")
+    , ((0,   xF86XK_MonBrightnessUp  ), "brightnessctl set +10%")
+    , ((0,   xF86XK_MonBrightnessDown), "brightnessctl set 10%-")
+    , ((0,   xF86XK_AudioMute        ), "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    , ((0,   xF86XK_AudioMicMute     ), "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
+    , ((0,   xF86XK_AudioLowerVolume ), "pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ -5%")
+    , ((0,   xF86XK_AudioRaiseVolume ), "pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ +5%")
     ]
 
 
@@ -41,7 +45,8 @@ main = do
             (avoidStruts . reflectHoriz $ Tall 1 (3/100) (1/2)) ||| Full
         , handleEventHook = handleEventHook def <> fullscreenEventHook
         , manageHook = mconcat
-            [ manageDocks
+            [ isFullscreen --> doFullFloat
+            , manageDocks
             , className =? "Firefox" <&&> appName =? "Places" --> doFloat
             , className =? "Firefox" --> doShift (wsNames !! 1)
             , manageHook def
