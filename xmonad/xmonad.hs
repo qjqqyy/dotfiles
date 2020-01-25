@@ -88,6 +88,7 @@ insKeys conf@(XConfig {modMask = modm}) =
     , ((modm,               xK_slash ), toggleWS)
     -- rebind quit
     , ((modm .|. shiftMask, xK_q     ), kill) -- close focused window
+    , ((mod1Mask,           xK_F4    ), kill)
     , ((modm .|. shiftMask, xK_x     ), io (exitWith ExitSuccess))
     -- invert binds for shrinking and expanding master
     , ((modm,               xK_h     ), sendMessage Expand)
