@@ -91,10 +91,13 @@ instance Exec Bluetooth where
 
 bluetooth :: String -> String -> (String -> IO ()) -> IO ()
 bluetooth on off cb = do
-    (_, hstdout, _, _) <- runInteractiveCommand "bluetooth"
+    (_, hstdout, _, p) <- runInteractiveCommand "bluetooth"
     hSetBinaryMode hstdout False
     replace <$> hGetLine hstdout
         >>= cb
+    -- idk how xmobar works but waitForProcess blocks forever
+    _ <- getProcessExitCode p
+    pure ()
   where
     replace :: String -> String
     replace str
