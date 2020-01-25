@@ -20,6 +20,7 @@ config = defaultConfig
         , "%battery%"
         , "%wlan0wi%"
         , "%bluetooth%"
+        , "%pulsemute% %pulsevolume%"
         , "%disku%"
         ]
     , commands =
@@ -40,6 +41,8 @@ config = defaultConfig
         , Run $ Bluetooth
             (xmobarColor green "" faBluetooth)
             (xmobarColor base04 "" faBluetoothB) 100
+        , Run $ PulseVolume 100
+        , Run $ PulseMute faVolume faMute 100
         ]
     }
   where
@@ -52,6 +55,8 @@ config = defaultConfig
     faDisk = fa "\xf0a0"
     faBluetooth = fa "\xf293"
     faBluetoothB = fa "\xf294"
+    faVolume = fa "\xf028"
+    faMute = fa "\xf026"
 
 main :: IO ()
 main = xmobar config
@@ -82,25 +87,44 @@ alternate = intercalate " " . reverse . zipWith ($) (cycle [w, id])
 (.|.) :: String -> String -> String
 a .|. b = a ++ xmobarColor base05 base06 "|" ++ b
 
+-- hack haskell threaded wait zombie process weirdness
+hackRun :: (String -> IO ()) -> FilePath -> [String] -> IO ThreadId
+hackRun cb cmd args = forkIO $ do
+    (_, hstdout, _, p) <- runInteractiveProcess cmd args Nothing Nothing
+    hSetBinaryMode hstdout False
+    hGetLine hstdout
+        >>= cb
+    waitForProcess p
+    pure ()
+
 -- hacky bluetooth indicator
 data Bluetooth = Bluetooth String String Int deriving (Read, Show)
 
 instance Exec Bluetooth where
     start (Bluetooth on off r) cb = go
-        where go = forkIO (bluetooth on off cb) >> tenthSeconds r >> go
+        where
+          go = hackRun (cb . replace) "bluetooth" [] >> tenthSeconds r >> go
+          replace str
+            | "on"  `isInfixOf` str = on
+            | "off" `isInfixOf` str = off
+            | otherwise             = "install tlp"
+
     alias _ = "bluetooth"
 
-bluetooth :: String -> String -> (String -> IO ()) -> IO ()
-bluetooth on off cb = do
-    (_, hstdout, _, p) <- runInteractiveCommand "bluetooth"
-    hSetBinaryMode hstdout False
-    replace <$> hGetLine hstdout
-        >>= cb
-    waitForProcess p
-    pure ()
-  where
-    replace :: String -> String
-    replace str
-      | "on"  `isInfixOf` str   = on
-      | "off" `isInfixOf` str   = off
-      | otherwise               = "install tlp"
+-- hacky audio indicator
+data PulseVolume = PulseVolume Int deriving (Read, Show)
+
+instance Exec PulseVolume where
+    alias _ = "pulsevolume"
+    start (PulseVolume r) cb = go
+        where go = hackRun cb "pamixer" ["--get-volume"] >> tenthSeconds r >> go
+
+data PulseMute = PulseMute String String Int deriving (Read, Show)
+
+instance Exec PulseMute where
+    alias _ = "pulsemute"
+    start (PulseMute unmuted muted r) cb = go
+        where go = hackRun (cb . replace) "pamixer" ["--get-mute"] >> tenthSeconds r >> go
+              replace "true" = muted
+              replace "false" = unmuted
+              replace _ = "install pamixer"
