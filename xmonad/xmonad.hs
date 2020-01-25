@@ -29,6 +29,9 @@ extraKeys modm = map (second spawn) $
     , ((0,   xF86XK_AudioMicMute     ), "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
     , ((0,   xF86XK_AudioLowerVolume ), "pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ -5%")
     , ((0,   xF86XK_AudioRaiseVolume ), "pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ +5%")
+    , ((0,   xF86XK_AudioPlay        ), "playerctl play-pause")
+    , ((0,   xF86XK_AudioNext        ), "playerctl next")
+    , ((0,   xF86XK_AudioPrev        ), "playerctl previous")
     ]
 
 
