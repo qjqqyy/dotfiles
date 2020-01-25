@@ -2,6 +2,7 @@ import Data.List
 import Xmobar
 import XMonad.Hooks.DynamicLog hiding (xmobar)
 
+import Control.Concurrent
 import System.Process
 import System.IO
 
@@ -86,7 +87,7 @@ data Bluetooth = Bluetooth String String Int deriving (Read, Show)
 
 instance Exec Bluetooth where
     start (Bluetooth on off r) cb = go
-        where go = bluetooth on off cb >> tenthSeconds r >> go
+        where go = forkIO (bluetooth on off cb) >> tenthSeconds r >> go
     alias _ = "bluetooth"
 
 bluetooth :: String -> String -> (String -> IO ()) -> IO ()
@@ -95,8 +96,7 @@ bluetooth on off cb = do
     hSetBinaryMode hstdout False
     replace <$> hGetLine hstdout
         >>= cb
-    -- idk how xmobar works but waitForProcess blocks forever
-    _ <- getProcessExitCode p
+    waitForProcess p
     pure ()
   where
     replace :: String -> String
