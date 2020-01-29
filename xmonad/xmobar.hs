@@ -21,7 +21,6 @@ config = defaultConfig
         , "%wlan0wi%"
         , "%bluetooth%"
         , "%pulsemute% %pulsevolume%"
-        , "%disku%"
         ]
     , commands =
         [ Run StdinReader
@@ -37,7 +36,6 @@ config = defaultConfig
         , Run $ Wireless "wlan0"
             [ "-t", faWifi ++ " <essid>"
             ] 100
-        , Run $ DiskU [("/",  faDisk ++ " <free>")] [] 600
         , Run $ Bluetooth
             (xmobarColor green "" faBluetooth)
             (xmobarColor base04 "" faBluetoothB) 100
@@ -52,7 +50,6 @@ config = defaultConfig
     faBolt = fa "\xf0e7"
     faBatteryHalf = fa "\xf242"
     faWifi = fa "\xf1eb"
-    faDisk = fa "\xf0a0"
     faBluetooth = fa "\xf293"
     faBluetoothB = fa "\xf294"
     faVolume = fa "\xf028"
