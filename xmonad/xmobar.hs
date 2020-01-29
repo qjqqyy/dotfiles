@@ -15,7 +15,7 @@ config = defaultConfig
     , textOffsets = [ -1, -5 ]
     , bgColor = base07
     , fgColor = base01
-    , template = "%StdinReader% }{ " ++ alternate
+    , template = "%StdinReader% } %XMonadLog% { " ++ alternate
         [ "%date%"
         , "%battery%"
         , "%wlan0wi%"
@@ -24,6 +24,7 @@ config = defaultConfig
         ]
     , commands =
         [ Run StdinReader
+        , Run XMonadLog
         , Run $ Date ("%a, %d %b %Y " .|. " %H:%M") "date" 150
         , Run $ Battery
             [ "-t" , "<acstatus>"

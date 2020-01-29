@@ -54,20 +54,24 @@ main = do
             , className =? "Firefox" --> doShift (wsNames !! 1)
             , manageHook def
             ]
-        , logHook = dynamicLogWithPP $ def
-            { ppOutput = hPutStrLn xmobarPipe
-            , ppTitle = (wrap " <fn=2>\xf2d0</fn> " "") . xmobarColor "#e5cece" "" . shorten 120
-            , ppCurrent = barWsName "#9b0877"
-            , ppVisible = barWsName "#637e35"
-            , ppUrgent  = barWsName "#e122a4"
-            , ppHidden  = barWsName "#4c114e"
-            , ppSep = " "
-            , ppWsSep = ""
-            , ppLayout = const ""
-            }
+        , logHook = do
+            dynamicLogWithPP workspacePP { ppOutput = hPutStrLn xmobarPipe }
+            dynamicLogString titlePP >>= xmonadPropLog
         }
   where
     barWsName bgColor = xmobarColor "#ccadcc" bgColor . wrap "<fn=1>  " "  </fn>"
+    workspacePP = def
+        { ppCurrent = barWsName "#9b0877"
+        , ppVisible = barWsName "#637e35"
+        , ppUrgent  = barWsName "#e122a4"
+        , ppHidden  = barWsName "#4c114e"
+        , ppWsSep = ""
+        , ppOrder = \(ws:_) -> [ws]
+        }
+    titlePP = def
+        { ppTitle = xmobarColor "#e5cece" "" . shorten 80
+        , ppOrder = \(_:_:t:_) -> [t]
+        }
 
 wsNames = ["壹", "貳", "參", "肆", "伍", "陸", "柒", "捌", "玖", "拾"]
 
