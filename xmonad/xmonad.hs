@@ -1,7 +1,6 @@
-import Control.Arrow (second)
-import Graphics.X11.ExtraTypes.XF86
-import System.Exit
 import XMonad
+import XMonad.StackSet (greedyView, shift)
+
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
@@ -13,7 +12,10 @@ import XMonad.Layout.Reflect
 import XMonad.Util.CustomKeys
 import XMonad.Util.Run
 
-import qualified XMonad.StackSet as W
+import Control.Arrow (second)
+import Graphics.X11.ExtraTypes.XF86
+import System.Exit
+
 
 extraKeys :: KeyMask -> [((KeyMask, KeySym), X())]
 extraKeys modm = map (second spawn) $
@@ -103,7 +105,7 @@ insKeys conf@(XConfig {modMask = modm}) =
     ] ++
     extraKeys modm ++
     -- move workspace to client then follow along
-    [((modm .|. shiftMask, k), windows $ W.greedyView i . W.shift i) |
+    [((modm .|. shiftMask, k), windows $ greedyView i . shift i) |
         (i, k) <- zip (workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])] ++
     [((modm, k), toggleOrView i) |
         (i, k) <- zip (workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])]

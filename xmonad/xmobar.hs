@@ -1,8 +1,8 @@
-import Data.List
 import Xmobar
 import XMonad.Hooks.DynamicLog hiding (xmobar)
 
 import Control.Concurrent
+import Data.List
 import System.Process
 import System.IO
 
@@ -12,10 +12,9 @@ config = defaultConfig
     , additionalFonts = [ "xft:Noto Sans SC:pixelsize=22"
                         , "xft:FontAwesome:pixelsize=22"
                         ]
-    , textOffsets = [ -1, -5 ]
     , bgColor = base07
     , fgColor = base01
-    , template = "%StdinReader% } %XMonadLog% { " ++ alternate
+    , template = "%StdinReader%}%XMonadLog%{ " ++ alternate
         [ "%date%"
         , "%battery%"
         , "%wlan0wi%"
