@@ -71,7 +71,7 @@ main = do
         , ppOrder = \(ws:_) -> [ws]
         }
     titlePP = def
-        { ppTitle = xmobarColor "#e5cece" "" . shorten 80
+        { ppTitle = xmobarColor "#e5cece" "" . shorten 75
         , ppOrder = \(_:_:t:_) -> [t]
         }
 
