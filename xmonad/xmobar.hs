@@ -24,7 +24,7 @@ config = defaultConfig
     , commands =
         [ Run StdinReader
         , Run XMonadLog
-        , Run $ Date ("%a, %d %b %Y " .|. " %H:%M") "date" 150
+        , Run $ Date ("%a, %e %b %Y " .|. " %H:%M") "date" 150
         , Run $ Battery
             [ "-t" , "<acstatus>"
             , "-l", red
