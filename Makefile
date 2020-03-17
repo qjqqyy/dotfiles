@@ -41,10 +41,10 @@ git: ~/.config/git/config
 xmonad: ~/.xmonad/xmonad.hs ~/.xmobar/xmobar.hs ~/bin/i3lock_wrapper
 
 ~/.xmonad/xmonad.hs: xmonad/xmonad.hs
-	ln -sf ../$(DOTPATH)/$< $@
+	install -m644 $< $@
 
 ~/.xmobar/xmobar.hs: xmonad/xmobar.hs
-	ln -sf ../$(DOTPATH)/$< $@
+	install -m644 $< $@
 
 ~/bin/i3lock_wrapper: xmonad/i3lock_wrapper
 	install -m700 $< $@
