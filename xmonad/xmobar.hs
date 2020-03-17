@@ -8,9 +8,9 @@ import System.IO
 
 config :: Config
 config = defaultConfig
-    { font = "xft:Fantasque Sans Mono:pixelsize=24"
-    , additionalFonts = [ "xft:Noto Sans SC:pixelsize=22"
-                        , "xft:FontAwesome:pixelsize=22"
+    { font = "xft:Fantasque Sans Mono:size=9"
+    , additionalFonts = [ "xft:Noto Sans SC:size=8"
+                        , "xft:FontAwesome:size=8"
                         ]
     , bgColor = base07
     , fgColor = base01
