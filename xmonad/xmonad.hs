@@ -86,6 +86,8 @@ delKeys XConfig {modMask = modm} =
     , (modm .|. shiftMask, xK_c     ) -- close focused window
     , (modm,               xK_h     ) -- shrink master
     , (modm,               xK_l     ) -- expand master
+    , (modm              , xK_comma ) -- Increment the number of windows in the master area
+    , (modm              , xK_period) -- Deincrement the number of windows in the master area
     ] ++
     -- rebind workspaces
     [ (modm .|. m, k) | m <- [shiftMask, 0], k <- [xK_1 .. xK_9] ]
@@ -102,6 +104,9 @@ insKeys conf@(XConfig {modMask = modm}) =
     -- invert binds for shrinking and expanding master
     , ((modm,               xK_h     ), sendMessage Expand)
     , ((modm,               xK_l     ), sendMessage Shrink)
+    -- invert binds for increasing and decreasing number of windows in master
+    , ((modm              , xK_comma ), sendMessage (IncMasterN (-1)))
+    , ((modm              , xK_period), sendMessage (IncMasterN 1))
     ] ++
     extraKeys modm ++
     -- move workspace to client then follow along
