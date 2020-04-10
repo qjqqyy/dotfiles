@@ -13,6 +13,7 @@ import XMonad.Util.CustomKeys
 import XMonad.Util.Run
 
 import Control.Arrow (second)
+import Data.List (isSuffixOf)
 import Graphics.X11.ExtraTypes.XF86
 import System.Exit
 
@@ -53,7 +54,8 @@ main = do
             [ isFullscreen --> doFullFloat
             , manageDocks
             , className =? "Firefox" <&&> appName =? "Places" --> doFloat
-            , className =? "Firefox" --> doShift (wsNames !! 1)
+            , className =? "Firefox" <&&> appName =? "Navigator" <&&> fmap (not . ("(Private Browsing)" `isSuffixOf`)) title --> doShift (wsNames !! 1)
+            , className =? "Firefox" <&&> appName =? "Navigator" <&&> fmap ("(Private Browsing)" `isSuffixOf`) title --> doShift (wsNames !! 2)
             , manageHook def
             ]
         , logHook = do
