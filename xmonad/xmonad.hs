@@ -1,5 +1,5 @@
 import XMonad
-import XMonad.StackSet (greedyView, shift)
+import qualified XMonad.StackSet as W
 
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
@@ -8,6 +8,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
+import XMonad.Layout.PerScreen
 import XMonad.Layout.Reflect
 import XMonad.Util.CustomKeys
 import XMonad.Util.Run
@@ -48,14 +49,17 @@ main = do
         , focusedBorderColor = "#4527f2"
         , workspaces = wsNames
         , layoutHook = smartBorders $
-            (avoidStruts . reflectHoriz $ Tall 1 (3/100) (1/2)) ||| Full
+            ifWider 1440
+              ((avoidStruts . reflectHoriz $ Tall 1 (3/100) (1/2)) ||| Full)
+              ((avoidStruts . reflectVert $ Mirror (Tall 1 (3/100) (1/2))) ||| Full)
         , handleEventHook = handleEventHook def <> fullscreenEventHook
         , manageHook = mconcat
             [ isFullscreen --> doFullFloat
             , manageDocks
             , className =? "Firefox" <&&> appName =? "Places" --> doFloat
-            , className =? "Firefox" <&&> appName =? "Navigator" <&&> fmap (not . ("(Private Browsing)" `isSuffixOf`)) title --> doShift (wsNames !! 1)
-            , className =? "Firefox" <&&> appName =? "Navigator" <&&> fmap ("(Private Browsing)" `isSuffixOf`) title --> doShift (wsNames !! 2)
+            , className =? "Firefox" <&&> appName =? "Navigator" --> doShift (wsNames !! 1)
+            , className =? "Chromium-browser" <&&> appName =? "chromium-browser" --> doShift (wsNames !! 2)
+            , className =? "Thunderbird" <&&> appName =? "Mail" --> doShift (wsNames !! 5)
             , manageHook def
             ]
         , logHook = do
@@ -112,7 +116,7 @@ insKeys conf@(XConfig {modMask = modm}) =
     ] ++
     extraKeys modm ++
     -- move workspace to client then follow along
-    [((modm .|. shiftMask, k), windows $ greedyView i . shift i) |
+    [((modm .|. shiftMask, k), windows $ W.greedyView i . W.shift i) |
         (i, k) <- zip (workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])] ++
     [((modm, k), toggleOrView i) |
         (i, k) <- zip (workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])]
