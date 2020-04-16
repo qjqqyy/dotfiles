@@ -48,3 +48,8 @@ xmonad: ~/.xmonad/xmonad.hs ~/.xmobar/xmobar.hs ~/bin/i3lock_wrapper
 
 ~/bin/i3lock_wrapper: xmonad/i3lock_wrapper
 	install -m700 $< $@
+
+xmodmap: ~/.Xmodmap
+
+~/.Xmodmap: Xmodmap
+	install -m644 $< $@

@@ -1,0 +1,8 @@
+! pretend I have a hhkb
+! ` ~ becomes Escape ~ instead
+keycode 9 = grave asciitilde grave asciitilde dead_tilde asciitilde dead_tilde
+keycode 49 = Escape asciitilde Escape asciitilde grave asciitilde
+
+! \| <-> backspace
+keycode 51 = BackSpace BackSpace BackSpace BackSpace NoSymbol NoSymbol
+keycode 22 = backslash bar backslash bar asciitilde asciitilde asciitilde
