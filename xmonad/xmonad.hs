@@ -43,7 +43,7 @@ main = do
     xmobarPipe <- spawnPipe "xmobar -d"
     xmonad $ docks . ewmh . withUrgencyHook NoUrgencyHook $ def
         { modMask = mod4Mask
-        , terminal = "urxvtc"
+        , terminal = "urxvtc-256color"
         , keys = customKeys delKeys insKeys
         , normalBorderColor = "#2a0834"
         , focusedBorderColor = "#4527f2"
