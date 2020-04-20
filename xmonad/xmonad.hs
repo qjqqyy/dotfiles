@@ -60,6 +60,7 @@ main = do
             , className =? "Firefox" <&&> appName =? "Navigator" --> doShift (wsNames !! 1)
             , className =? "Chromium-browser" <&&> appName =? "chromium-browser" --> doShift (wsNames !! 2)
             , className =? "Thunderbird" <&&> appName =? "Mail" --> doShift (wsNames !! 5)
+            , className =? "dolphin" --> doFloat
             , manageHook def
             ]
         , logHook = do
