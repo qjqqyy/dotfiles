@@ -1,4 +1,4 @@
-module Bar.SkelConfig where
+module Bar.SkelConfig (MachineSpecificCrap(..), mkConfig) where
 
 import Colours
 
@@ -7,16 +7,21 @@ import XMonad.Hooks.DynamicLog hiding (xmobar)
 
 import Data.List
 
-mkConfig :: [String] -> [Runnable] -> Config -> Config
-mkConfig extraItems extraCommands baseConfig = baseConfig
+data MachineSpecificCrap = MachineSpecificCrap
+    { templateItems :: [String]
+    , extraCommands :: [Runnable]
+    }
+
+mkConfig :: MachineSpecificCrap -> Config -> Config
+mkConfig mss baseConfig = baseConfig
     { bgColor = base07
     , fgColor = base01
-    , template = "%StdinReader%}%XMonadLog%{ " ++ alternate ("%date%" : extraItems)
+    , template = "%StdinReader%}%XMonadLog%{ " ++ alternate ("%date%" : templateItems mss)
     , commands =
         [ Run StdinReader
         , Run XMonadLog
         , Run $ Date ("%a, %e %b %Y " .|. " %H:%M") "date" 250
-        ] ++ extraCommands
+        ] ++ extraCommands mss
     }
 
 alternate :: [String] -> String

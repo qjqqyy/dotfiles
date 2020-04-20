@@ -1,3 +1,7 @@
+module BaseXMonad where
+
+import Colours
+
 import XMonad
 import qualified XMonad.StackSet as W
 
@@ -45,8 +49,8 @@ main = do
         { modMask = mod4Mask
         , terminal = "urxvtc-256color"
         , keys = customKeys delKeys insKeys
-        , normalBorderColor = "#2a0834"
-        , focusedBorderColor = "#4527f2"
+        , normalBorderColor = base06
+        , focusedBorderColor = blue
         , workspaces = wsNames
         , layoutHook = smartBorders $
             ifWider 1440
@@ -68,17 +72,17 @@ main = do
             dynamicLogString titlePP >>= xmonadPropLog
         }
   where
-    barWsName bgColor = xmobarColor "#ccadcc" bgColor . wrap "<fn=1>  " "  </fn>"
+    barWsName bgColor = xmobarColor base01 bgColor . wrap "<fn=1>  " "  </fn>"
     workspacePP = def
-        { ppCurrent = barWsName "#9b0877"
-        , ppVisible = barWsName "#637e35"
-        , ppUrgent  = barWsName "#e122a4"
-        , ppHidden  = barWsName "#4c114e"
+        { ppCurrent = barWsName purple
+        , ppVisible = barWsName green
+        , ppUrgent  = barWsName red
+        , ppHidden  = barWsName base05
         , ppWsSep = ""
         , ppOrder = \(ws:_) -> [ws]
         }
     titlePP = def
-        { ppTitle = xmobarColor "#e5cece" "" . shorten 75
+        { ppTitle = xmobarColor base00 "" . shorten 75
         , ppOrder = \(_:_:t:_) -> [t]
         }
 

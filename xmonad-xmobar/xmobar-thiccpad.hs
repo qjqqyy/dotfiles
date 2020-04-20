@@ -1,5 +1,5 @@
-import Bar.SkelConfig
 import Bar.Indicators
+import Bar.SkelConfig
 import Colours
 
 import Xmobar
@@ -43,7 +43,7 @@ extraCommands =
 
 
 config :: Config
-config = mkConfig extraItems extraCommands defaultConfig
+config = mkConfig (MachineSpecificCrap extraItems extraCommands) defaultConfig
     { font = "xft:Fantasque Sans Mono:size=9"
     , additionalFonts = [ "xft:Noto Sans SC:size=8"
                         , "xft:FontAwesome:size=8"
