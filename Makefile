@@ -37,20 +37,25 @@ git: ~/.config/git/config
 	mkdir -p $(dir $@)
 	install -m644 $< $@
 
-.PHONY: xmonad
-xmonad: ~/.xmonad/xmonad.hs ~/.xmonad/lib ~/.xmobar/xmobar.hs ~/bin/i3lock_wrapper
+.PHONY: xmonad xmobar
+xmonad: ~/.xmonad/xmonad.hs ~/.xmonad/lib ~/bin/i3lock_wrapper
 
-~/.xmonad/xmonad.hs: xmonad/xmonad.hs
+xmobar: ~/.xmobar/xmobar.hs ~/.xmobar/lib
+
+~/.xmonad/xmonad.hs: xmonad-xmobar/xmonad.hs
 	install -m644 $< $@
 
-~/.xmonad/lib: xmonad/lib
+~/.xmonad/lib: xmonad-xmobar/lib
 	ln -sf ../$(DOTPATH)/$< $@
 
-~/.xmobar/xmobar.hs: xmonad/xmobar.hs
+~/bin/i3lock_wrapper: xmonad-xmobar/i3lock_wrapper
+	install -m700 $< $@
+
+~/.xmobar/xmobar.hs: xmonad-xmobar/xmobar-$(HOSTNAME).hs
 	install -m644 $< $@
 
-~/bin/i3lock_wrapper: xmonad/i3lock_wrapper
-	install -m700 $< $@
+~/.xmobar/lib: xmonad-xmobar/lib
+	ln -sf ../$(DOTPATH)/$< $@
 
 xmodmap: ~/.Xmodmap
 
