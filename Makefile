@@ -42,7 +42,7 @@ xmonad: ~/.xmonad/xmonad.hs ~/.xmonad/lib ~/bin/i3lock_wrapper
 
 xmobar: ~/.xmobar/xmobar.hs ~/.xmobar/lib
 
-~/.xmonad/xmonad.hs: xmonad-xmobar/xmonad.hs
+~/.xmonad/xmonad.hs: xmonad-xmobar/xmonad-$(HOSTNAME).hs
 	install -m644 $< $@
 
 ~/.xmonad/lib: xmonad-xmobar/lib

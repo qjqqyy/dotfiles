@@ -1,4 +1,4 @@
-module BaseXMonad where
+module BaseXMonad (MachineSpecificCrap(..), mkMain) where
 
 import Colours
 
@@ -22,28 +22,11 @@ import Data.List (isSuffixOf)
 import Graphics.X11.ExtraTypes.XF86
 import System.Exit
 
+data MachineSpecificCrap = MachineSpecificCrap
+    { titleWidth :: Int }
 
-extraKeys :: KeyMask -> [((KeyMask, KeySym), X())]
-extraKeys modm = map (second spawn) $
-    [ ((controlMask .|. mod1Mask, xK_l), "i3lock_wrapper")
-    , ((controlMask,        xK_Print ), "maim -s | xclip -selection clipboard -t image/png")
-    , ((mod1Mask,           xK_F2    ), "rofi -show run")
-    , ((modm .|. shiftMask, xK_Return), "rofi -show ssh")
-    , ((mod1Mask,           xK_space ), "rofi -show drun")
-    , ((mod1Mask,           xK_Tab   ), "rofi -show window")
-    , ((0,   xF86XK_MonBrightnessUp  ), "brightnessctl set +10%")
-    , ((0,   xF86XK_MonBrightnessDown), "brightnessctl set 10%-")
-    , ((0,   xF86XK_AudioMute        ), "pactl set-sink-mute @DEFAULT_SINK@ toggle")
-    , ((0,   xF86XK_AudioMicMute     ), "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
-    , ((0,   xF86XK_AudioLowerVolume ), "pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ -5%")
-    , ((0,   xF86XK_AudioRaiseVolume ), "pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ +5%")
-    , ((0,   xF86XK_AudioPlay        ), "playerctl play-pause")
-    , ((0,   xF86XK_AudioNext        ), "playerctl next")
-    , ((0,   xF86XK_AudioPrev        ), "playerctl previous")
-    ]
-
-
-main = do
+mkMain :: MachineSpecificCrap -> IO ()
+mkMain msc = do
     xmobarPipe <- spawnPipe "xmobar -d"
     xmonad $ docks . ewmh . withUrgencyHook NoUrgencyHook $ def
         { modMask = mod4Mask
@@ -82,7 +65,7 @@ main = do
         , ppOrder = \(ws:_) -> [ws]
         }
     titlePP = def
-        { ppTitle = xmobarColor base00 "" . shorten 75
+        { ppTitle = xmobarColor base00 "" . shorten (titleWidth msc)
         , ppOrder = \(_:_:t:_) -> [t]
         }
 
@@ -125,3 +108,22 @@ insKeys conf@(XConfig {modMask = modm}) =
         (i, k) <- zip (workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])] ++
     [((modm, k), toggleOrView i) |
         (i, k) <- zip (workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])]
+
+extraKeys :: KeyMask -> [((KeyMask, KeySym), X())]
+extraKeys modm = map (second spawn) $
+    [ ((controlMask .|. mod1Mask, xK_l), "i3lock_wrapper")
+    , ((controlMask,        xK_Print ), "maim -s | xclip -selection clipboard -t image/png")
+    , ((mod1Mask,           xK_F2    ), "rofi -show run")
+    , ((modm .|. shiftMask, xK_Return), "rofi -show ssh")
+    , ((mod1Mask,           xK_space ), "rofi -show drun")
+    , ((mod1Mask,           xK_Tab   ), "rofi -show window")
+    , ((0,   xF86XK_MonBrightnessUp  ), "brightnessctl set +10%")
+    , ((0,   xF86XK_MonBrightnessDown), "brightnessctl set 10%-")
+    , ((0,   xF86XK_AudioMute        ), "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    , ((0,   xF86XK_AudioMicMute     ), "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
+    , ((0,   xF86XK_AudioLowerVolume ), "pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ -5%")
+    , ((0,   xF86XK_AudioRaiseVolume ), "pactl set-sink-mute @DEFAULT_SINK@ false; pactl set-sink-volume @DEFAULT_SINK@ +5%")
+    , ((0,   xF86XK_AudioPlay        ), "playerctl play-pause")
+    , ((0,   xF86XK_AudioNext        ), "playerctl next")
+    , ((0,   xF86XK_AudioPrev        ), "playerctl previous")
+    ]
