@@ -1,0 +1,18 @@
+module Colours where
+
+base00  = "#e5cece"
+base01  = "#ccadcc"
+base02  = "#b273b9"
+base03  = "#a54da5"
+base04  = "#703170"
+base05  = "#4c114e"
+base06  = "#2a0834"
+base07  = "#100013"
+red     = "#e122a4"
+purple  = "#9b0877"
+yellow  = "#9b6800"
+green   = "#637e35"
+cyan    = "#147e7f"
+blue    = "#4527f2"
+violet  = "#7901cb"
+magenta = "#b101a9"

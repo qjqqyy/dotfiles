@@ -38,10 +38,13 @@ git: ~/.config/git/config
 	install -m644 $< $@
 
 .PHONY: xmonad
-xmonad: ~/.xmonad/xmonad.hs ~/.xmobar/xmobar.hs ~/bin/i3lock_wrapper
+xmonad: ~/.xmonad/xmonad.hs ~/.xmonad/lib ~/.xmobar/xmobar.hs ~/bin/i3lock_wrapper
 
 ~/.xmonad/xmonad.hs: xmonad/xmonad.hs
 	install -m644 $< $@
+
+~/.xmonad/lib: xmonad/lib
+	ln -sf ../$(DOTPATH)/$< $@
 
 ~/.xmobar/xmobar.hs: xmonad/xmobar.hs
 	install -m644 $< $@
