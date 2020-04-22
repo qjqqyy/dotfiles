@@ -34,7 +34,7 @@ zbell_end() {
         growl "$zbell_lastcmd"
     fi
   fi
-  unset zbell_timestamp
+  unset zbell_timestamp zbell_lastcmd ran_long has_ignored_cmd cmd words util
 }
 
 zbellinit() {

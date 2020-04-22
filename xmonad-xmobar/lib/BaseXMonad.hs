@@ -113,6 +113,7 @@ extraKeys :: KeyMask -> [((KeyMask, KeySym), X())]
 extraKeys modm = map (second spawn) $
     [ ((controlMask .|. mod1Mask, xK_l), "i3lock_wrapper")
     , ((controlMask,        xK_Print ), "maim -s | xclip -selection clipboard -t image/png")
+    , ((mod1Mask,           xK_Print ), "xclip -selection clipboard -o | curl -v -F randomname=a -F file='@-;type=image/png;filename=a.png' 'https://uguu.se/api.php?d=upload-tool' | xclip -f | xclip -selection clipboard")
     , ((mod1Mask,           xK_F2    ), "rofi -show run")
     , ((modm .|. shiftMask, xK_Return), "rofi -show ssh")
     , ((mod1Mask,           xK_space ), "rofi -show drun")

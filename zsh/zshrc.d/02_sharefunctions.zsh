@@ -2,19 +2,18 @@
 # pastes & uploads
 clipboard() {
   if (( $+commands[clip.exe] )); then
-    clip=clip.exe
+    clip.exe
   elif (( $+commands[pbcopy] )); then
-    clip=pbcopy
+    pbcopy
   elif [[ ! -z $DISPLAY ]]; then
     if (( $+commands[xclip] )); then
-      clip=xclip
+      xclip
     elif (( $+commands[xsel] )); then
-      clip=xsel
+      xsel
     else
-      clip=cat
+      cat
     fi
   else
-    clip=cat
+    cat
   fi
-  $clip
 }
