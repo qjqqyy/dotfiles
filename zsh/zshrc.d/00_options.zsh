@@ -5,7 +5,7 @@ colors
 
 # ignore autocorrect to autocomplete definitions
 CORRECT_IGNORE='_*'
-HISTFILE=${HISTFILE:-$HOME/.zsh/history}
+HISTFILE=$HOME/.zsh/history
 HISTSIZE=5000
 SAVEHIST=$HISTSIZE
 KEYTIMEOUT=2
@@ -42,8 +42,8 @@ LC_TIME=${LC_TIME:-en_GB.UTF-8}
 LANG=${LANG:-en_US.UTF-8}
 export EDITOR VISUAL PAGER TZ LC_COLLATE LC_TIME LANG
 
+# sanitize $TERM for OSes with shitty terminfo
 if [[ $OSTYPE =~ freebsd ]]; then
-  # sanitize $TERM
   case $TERM in
     *konsole*)
       TERM=xterm-256color
@@ -52,4 +52,8 @@ if [[ $OSTYPE =~ freebsd ]]; then
       TERM=screen-256color
       ;;
   esac
+elif [[ $OSTYPE =~ darwin ]]; then
+  if [[ $TERM =~ "rxvt-unicode" ]]; then
+    TERM=${TERM//-unicode/}
+  fi
 fi
