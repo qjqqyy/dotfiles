@@ -56,4 +56,5 @@ elif [[ $OSTYPE =~ darwin ]]; then
   if [[ $TERM =~ "rxvt-unicode" ]]; then
     TERM=${TERM//-unicode/}
   fi
+  unset LC_CTYPE
 fi
