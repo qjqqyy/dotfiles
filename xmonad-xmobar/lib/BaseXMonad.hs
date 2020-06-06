@@ -82,11 +82,12 @@ delKeys XConfig {modMask = modm} =
     , (modm,               xK_l     ) -- expand master
     , (modm              , xK_comma ) -- Increment the number of windows in the master area
     , (modm              , xK_period) -- Deincrement the number of windows in the master area
+    , (modm              , xK_space ) -- Rotate through the available layout algorithms
     ] ++
     -- rebind workspaces
     [ (modm .|. m, k) | m <- [shiftMask, 0], k <- [xK_1 .. xK_9] ]
 
-insKeys :: XConfig l -> [((KeyMask, KeySym), X ())]
+insKeys :: XConfig Layout -> [((KeyMask, KeySym), X ())]
 insKeys conf@(XConfig {modMask = modm}) =
     [ ((modm,               xK_Return), spawn $ terminal conf)
     -- back and forth
@@ -101,6 +102,9 @@ insKeys conf@(XConfig {modMask = modm}) =
     -- invert binds for increasing and decreasing number of windows in master
     , ((modm              , xK_comma ), sendMessage (IncMasterN (-1)))
     , ((modm              , xK_period), sendMessage (IncMasterN 1))
+    , ((mod1Mask          , xK_space ), sendMessage NextLayout)
+    -- both modm and alt resets layout on the current workspace
+    , ((mod1Mask .|. shiftMask, xK_space), setLayout $ layoutHook conf)
     ] ++
     extraKeys modm ++
     -- move workspace to client then follow along
@@ -114,9 +118,9 @@ extraKeys modm = map (second spawn) $
     [ ((controlMask .|. mod1Mask, xK_l), "i3lock_wrapper")
     , ((controlMask,        xK_Print ), "maim --hidecursor --select | xclip -selection clipboard -t image/png")
     , ((mod1Mask,           xK_Print ), "xclip -selection clipboard -o | curl -v -F randomname=a -F file='@-;type=image/png;filename=a.png' 'https://uguu.se/api.php?d=upload-tool' | xclip -f | xclip -selection clipboard")
-    , ((mod1Mask,           xK_F2    ), "rofi -show run")
+    , ((modm,               xK_F2    ), "rofi -show run")
     , ((modm .|. shiftMask, xK_Return), "rofi -show ssh")
-    , ((mod1Mask,           xK_space ), "rofi -show drun")
+    , ((modm,               xK_space ), "rofi -show drun")
     , ((mod1Mask,           xK_Tab   ), "rofi -show window")
     , ((0,   xF86XK_MonBrightnessUp  ), "brightnessctl set +10%")
     , ((0,   xF86XK_MonBrightnessDown), "brightnessctl set 10%-")
