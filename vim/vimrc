@@ -82,6 +82,8 @@ let g:airline_symbols.maxlinenr = ''
 " disable conceal for pandoc
 let g:pandoc#syntax#conceal#use = 0
 
+let g:tex_flavor = 'latex'
+
 if has('gui_running')
 "    set guifont=Source\ Code\ Pro\ Medium\ 10
     set guicursor+=a:blinkon0
