@@ -19,6 +19,7 @@ import XMonad.Util.CustomKeys
 import XMonad.Util.Run
 
 import Control.Arrow (second)
+import Control.Monad (liftM2)
 import Data.List (isSuffixOf)
 import Graphics.X11.ExtraTypes.XF86
 import System.Exit
@@ -95,6 +96,7 @@ insKeys conf@(XConfig {modMask = modm}) =
     [ ((modm,               xK_Return), spawn $ terminal conf)
     -- back and forth
     , ((modm,               xK_slash ), toggleWS)
+    , ((modm .|. shiftMask, xK_slash ), gets (W.currentTag . windowset) >>= toggleOrDoSkip [] moveToAndFollow)
     -- rebind quit
     , ((modm .|. shiftMask, xK_q     ), kill) -- close focused window
     , ((mod1Mask,           xK_F4    ), kill)
@@ -111,10 +113,12 @@ insKeys conf@(XConfig {modMask = modm}) =
     ] ++
     extraKeys modm ++
     -- move workspace to client then follow along
-    [((modm .|. shiftMask, k), windows $ W.greedyView i . W.shift i) |
+    [((modm .|. shiftMask, k), toggleOrDoSkip [] moveToAndFollow i) |
         (i, k) <- zip (workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])] ++
     [((modm, k), toggleOrView i) |
         (i, k) <- zip (workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])]
+  where
+    moveToAndFollow = liftM2 (.) W.greedyView W.shift
 
 extraKeys :: KeyMask -> [((KeyMask, KeySym), X())]
 extraKeys modm = map (second spawn) $
