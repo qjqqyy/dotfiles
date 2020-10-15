@@ -14,6 +14,7 @@ import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerScreen
 import XMonad.Layout.Reflect
+import XMonad.Layout.Spacing
 import XMonad.Util.CustomKeys
 import XMonad.Util.Run
 
@@ -35,10 +36,11 @@ mkMain msc = do
         , normalBorderColor = base06
         , focusedBorderColor = blue
         , workspaces = wsNames
-        , layoutHook = smartBorders $
+        , layoutHook =
+            smartBorders $
             ifWider 1440
-              ((avoidStruts . reflectHoriz $ Tall 1 (3/100) (1/2)) ||| Full)
-              ((avoidStruts . reflectVert $ Mirror (Tall 1 (3/100) (1/2))) ||| Full)
+              ((avoidStruts . gaps . reflectHoriz $ Tall 1 (3/100) (1/2)) ||| Full)
+              ((avoidStruts . gaps . reflectVert $ Mirror (Tall 1 (3/100) (1/2))) ||| Full)
         , handleEventHook = handleEventHook def <> fullscreenEventHook
         , manageHook = mconcat
             [ isFullscreen --> doFullFloat
@@ -55,6 +57,7 @@ mkMain msc = do
             dynamicLogString titlePP >>= xmonadPropLog
         }
   where
+    gaps = spacingRaw True (Border 0 2 2 2) True (Border 2 2 2 2) True
     barWsName bgColor = xmobarColor base01 bgColor . wrap "<fn=1>  " "  </fn>"
     workspacePP = def
         { ppCurrent = barWsName purple
