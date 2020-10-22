@@ -42,13 +42,10 @@ extraCommands =
     faMute = fa "\xf026"
 
 
-config :: Config
-config = mkConfig (MachineSpecificCrap extraItems Main.extraCommands) defaultConfig
+main :: IO ()
+main = mkMain (MachineSpecificCrap extraItems Main.extraCommands) defaultConfig
     { font = "xft:Fantasque Sans Mono:size=9"
     , additionalFonts = [ "xft:Noto Sans SC:size=8"
                         , "xft:FontAwesome:size=8"
                         ]
     }
-
-main :: IO ()
-main = xmobar config

@@ -59,12 +59,11 @@ mkMain msc = do
         }
   where
     gaps = spacingRaw True (Border 0 2 2 2) True (Border 2 2 2 2) True
-    barWsName bgColor = xmobarColor base01 bgColor . wrap "<fn=1>  " "  </fn>"
     workspacePP = def
-        { ppCurrent = barWsName purple
-        , ppVisible = barWsName green
-        , ppUrgent  = barWsName red
-        , ppHidden  = barWsName base05
+        { ppCurrent = mkWorkspacePP purple
+        , ppVisible = mkWorkspacePP green
+        , ppUrgent  = mkWorkspacePP red
+        , ppHidden  = mkWorkspacePP base05
         , ppWsSep = ""
         , ppOrder = \(ws:_) -> [ws]
         }
@@ -74,6 +73,19 @@ mkMain msc = do
         }
 
 wsNames = ["壹", "貳", "參", "肆", "伍", "陸", "柒", "捌", "玖", "拾"]
+wsIndexOf "壹" = '1'
+wsIndexOf "貳" = '2'
+wsIndexOf "參" = '3'
+wsIndexOf "肆" = '4'
+wsIndexOf "伍" = '5'
+wsIndexOf "陸" = '6'
+wsIndexOf "柒" = '7'
+wsIndexOf "捌" = '8'
+wsIndexOf "玖" = '9'
+wsIndexOf "拾" = '0'
+barWsName bgColor = xmobarColor base01 bgColor . wrap "<fn=1>  " "  </fn>"
+barWsAction wsIndex = wrap ("<action=`xdotool key super+" ++ (wsIndex:"`>")) "</action>"
+mkWorkspacePP colour = (barWsAction . wsIndexOf) <*> (barWsName colour)
 
 -- keybinds
 delKeys :: XConfig l -> [(KeyMask, KeySym)]

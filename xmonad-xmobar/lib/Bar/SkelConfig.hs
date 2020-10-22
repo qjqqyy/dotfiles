@@ -1,8 +1,9 @@
-module Bar.SkelConfig (MachineSpecificCrap(..), mkConfig) where
+module Bar.SkelConfig (MachineSpecificCrap(..), mkConfig, mkMain) where
 
 import Colours
 
 import Xmobar
+import XMonad.Core (uninstallSignalHandlers)
 import XMonad.Hooks.DynamicLog hiding (xmobar)
 
 import Data.List
@@ -16,13 +17,16 @@ mkConfig :: MachineSpecificCrap -> Config -> Config
 mkConfig mss baseConfig = baseConfig
     { bgColor = base07
     , fgColor = base01
-    , template = "%StdinReader%}%XMonadLog%{ " ++ alternate ("%date%" : templateItems mss)
+    , template = "%UnsafeStdinReader%}%XMonadLog%{ " ++ alternate ("%date%" : templateItems mss)
     , commands =
-        [ Run StdinReader
+        [ Run UnsafeStdinReader
         , Run XMonadLog
         , Run $ Date ("%a, %e %b %Y " .|. " %H:%M") "date" 250
         ] ++ extraCommands mss
     }
+
+mkMain :: MachineSpecificCrap -> Config -> IO ()
+mkMain mss baseConfig = uninstallSignalHandlers >> xmobar (mkConfig mss baseConfig)
 
 alternate :: [String] -> String
 alternate = intercalate " " . reverse . zipWith ($) (cycle [w, id])
