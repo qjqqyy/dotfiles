@@ -19,7 +19,6 @@ import XMonad.Util.CustomKeys
 import XMonad.Util.Run
 
 import Control.Arrow (second)
-import Control.Monad (liftM2)
 import Data.List (isSuffixOf)
 import Graphics.X11.ExtraTypes.XF86
 import System.Exit
@@ -130,7 +129,7 @@ insKeys conf@(XConfig {modMask = modm}) =
     [((modm, k), toggleOrView i) |
         (i, k) <- zip (workspaces conf) ([xK_1 .. xK_9] ++ [xK_0])]
   where
-    moveToAndFollow = liftM2 (.) W.greedyView W.shift
+    moveToAndFollow = (.) <$> W.greedyView <*> W.shift
 
 extraKeys :: KeyMask -> [((KeyMask, KeySym), X())]
 extraKeys modm = map (second spawn) $
