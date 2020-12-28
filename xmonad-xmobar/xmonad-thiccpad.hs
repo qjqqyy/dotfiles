@@ -1,3 +1,3 @@
 import BaseXMonad
 
-main = mkMain (MachineSpecificCrap { titleWidth = 75 })
+main = mkMain (MachineSpecificCrap { titleWidth = 73 })

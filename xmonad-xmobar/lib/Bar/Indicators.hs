@@ -9,9 +9,8 @@ import Data.List
 import System.Process
 import System.IO
 
--- hack haskell threaded wait zombie process weirdness
-hackRun :: (String -> IO ()) -> FilePath -> [String] -> IO ThreadId
-hackRun cb cmd args = forkIO $ do
+hackRun :: (String -> IO ()) -> FilePath -> [String] -> IO ()
+hackRun cb cmd args = do
     (_, hstdout, _, p) <- runInteractiveProcess cmd args Nothing Nothing
     hSetBinaryMode hstdout False
     hGetLine hstdout
