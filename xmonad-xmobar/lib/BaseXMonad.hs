@@ -50,6 +50,8 @@ mkMain msc = do
             , className =? "Chromium-browser" <&&> appName =? "chromium-browser" --> doShift (wsNames !! 2)
             , className =? "Thunderbird" <&&> appName =? "Mail" --> doShift (wsNames !! 5)
             , className =? "dolphin" --> doFloat
+            , className =? "discord" <&&> appName =? "discord" <&&> title =? "Discord Updater" --> doIgnore
+            , className =? "discord" <&&> appName =? "discord" --> doShift (wsNames !! 0)
             , manageHook def
             ]
         , logHook = do
