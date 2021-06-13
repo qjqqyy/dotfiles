@@ -1,0 +1,46 @@
+! vim: set ft=xdefaults :
+
+! #define background_opacity BEFORE including this
+
+#define base00 #e5cece
+#define base01 #ccadcc
+#define base02 #b273b9
+#define base03 #a54da5
+#define base04 #703170
+#define base05 #4c114e
+#define base06 #2a0834
+#define base07 #100013
+#define base08 #e122a4
+#define base09 #9b0877
+#define base0A #9b6800
+#define base0B #637e35
+#define base0C #147e7f
+#define base0D #4527f2
+#define base0E #7901cb
+#define base0F #b101a9
+
+URxvt*foreground:   base05
+#ifdef background_opacity
+URxvt*background:   [background_opacity]base00
+#else
+URxvt*background:   base00
+#endif
+URxvt*cursorColor:  base05
+
+URxvt*color0:       base00
+URxvt*color1:       base08
+URxvt*color2:       base0B
+URxvt*color3:       base0A
+URxvt*color4:       base0D
+URxvt*color5:       base0E
+URxvt*color6:       base0C
+URxvt*color7:       base05
+
+URxvt*color8:       base03
+URxvt*color9:       base09
+URxvt*color10:      base01
+URxvt*color11:      base02
+URxvt*color12:      base04
+URxvt*color13:      base06
+URxvt*color14:      base0F
+URxvt*color15:      base07

@@ -1,0 +1,33 @@
+! vim: set ft=xdefaults :
+
+! ------------------------------------------------------------------------------
+! ROFI Color theme
+! Copyright: Étienne Deparis
+! ------------------------------------------------------------------------------
+! "Color scheme for normal row" Set from: File
+rofi.color-enabled: true
+rofi.color-normal:  argb:00100013, base00, argb:00100013, base03, base00
+! "Color scheme for urgent row" Set from: File
+rofi.color-urgent:  argb:00100013, base08, argb:00100013, base08, base00
+! "Color scheme for active row" Set from: File
+rofi.color-active:  argb:00100013, base0B, argb:00100013, base03, base0B
+! "Color scheme window" Set from: File
+rofi.color-window:  argb:b0100013, #4c114e, #a54da5
+! "Separator style (none, dash, solid)" Set from: File
+rofi.separator-style: solid
+
+!rofi.font: Noto Sans 21
+!rofi.terminal: urxvtc-256color
+rofi.ssh-command: {terminal} -e {ssh-client} {host} [-p {port}]
+!rofi.disable-history: true
+!rofi.padding: 60
+
+!keybinds
+rofi.kb-remove-char-back:BackSpace,Shift+BackSpace,Control+h
+rofi.kb-mode-next:       Shift+Right,Control+Tab
+rofi.kb-mode-previous:   Shift+Left,Control+Shift+ISO_Left_Tab
+rofi.kb-row-up:          Up,Control+p,Shift+ISO_Left_Tab
+rofi.kb-row-tab:         Tab
+
+! Enabled modi
+rofi.modi: run,drun,ssh,window

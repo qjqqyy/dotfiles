@@ -1,0 +1,41 @@
+! vim: set ft=xdefaults :
+
+! #define background_opacity BEFORE including this
+
+! Pseudo-transparency in urxvt
+#ifdef background_opacity
+URxvt*depth: 32
+#else
+URxvt*fading: 10
+#endif
+!URxvt*transparent: true
+!URxvt*shading: 15
+!URxvt*blurRadius: 5
+
+URxvt*intensityStyles: false
+URxvt*cursorBlink: true
+URxvt*cursorUnderline: true
+URxvt*urgentOnBell: true
+URxvt*insecure: true
+URxvt*scrollBar: false
+URxvt*scrollBar_right: true
+URxvt*scrollstyle: plain
+URxvt*secondaryScroll: true
+! do not scroll tty with output
+URxvt*scrollTtyOutput: false
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+
+URxvt*saveLines: 8192
+
+! click to open url
+URxvt*perl-ext-common: default,matcher
+! using url-launcher does not split the command
+!URxvt*matcher.launcher.0: chromium --incognito $&
+URxvt*matcher.button: 3
+
+! IRC
+IRC*title:      IRC
+IRC*saveLines:  0
