@@ -53,7 +53,7 @@ if [[ $OSTYPE =~ freebsd ]]; then
       ;;
   esac
 elif [[ $OSTYPE =~ darwin ]]; then
-  if [[ $TERM =~ "rxvt-unicode" ]]; then
+  if [[ $TERM =~ "rxvt-unicode" && ! -r "$HOME/.terminfo/72/$TERM" ]]; then
     TERM=${TERM//-unicode/}
   fi
   unset LC_CTYPE
