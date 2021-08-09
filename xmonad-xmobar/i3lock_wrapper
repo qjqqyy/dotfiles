@@ -15,7 +15,7 @@ revert() {
 
 trap revert HUP INT TERM
 maim --format=png "$image"
-ffmpeg -loglevel quiet -y -i "$image" -vf "gblur=sigma=24" "$image_final"
+ffmpeg -loglevel quiet -y -i "$image" -vf "gblur=sigma=88" "$image_final"
 xset dpms 5 5 5
 i3lock -n -e -i "$image_final"
 revert
