@@ -11,8 +11,8 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
+import XMonad.Layout.IfLandscape
 import XMonad.Layout.NoBorders
-import XMonad.Layout.PerScreen
 import XMonad.Layout.Reflect
 import XMonad.Layout.Spacing
 import XMonad.Util.CustomKeys
@@ -38,7 +38,7 @@ mkMain msc = do
         , workspaces = wsNames
         , layoutHook =
             smartBorders $
-            ifWider 1440
+            ifLandscape
               ((avoidStruts . gaps . reflectHoriz $ Tall 1 (3/100) (1/2)) ||| Full)
               ((avoidStruts . gaps . reflectVert $ Mirror (Tall 1 (3/100) (1/2))) ||| Full)
         , handleEventHook = handleEventHook def <> fullscreenEventHook
