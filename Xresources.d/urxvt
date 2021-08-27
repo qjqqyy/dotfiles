@@ -31,10 +31,15 @@ URxvt*scrollTtyKeypress: true
 URxvt*saveLines: 8192
 
 ! click to open url
-URxvt*perl-ext-common: default,matcher
+URxvt*perl-ext-common: default,matcher,font-size
 ! using url-launcher does not split the command
 !URxvt*matcher.launcher.0: chromium --incognito $&
 URxvt*matcher.button: 3
+
+URxvt.keysym.Control-equal: perl:font-size:increase
+URxvt.keysym.Control-minus: perl:font-size:decrease
+URxvt.keysym.Control-0:     perl:font-size:reset
+URxvt*font-size.step: 2
 
 ! IRC
 IRC*title:      IRC
