@@ -29,10 +29,9 @@ zbell_end() {
   done
 
   if (( ! $has_ignored_cmd )) && (( ran_long )); then
+    # https://iterm2.com/documentation-escape-codes.html
+    print -n "\x1b]9;$zbell_lastcmd\x7"
     print -n "\a"
-    if [[ -n `declare -f growl` ]]; then
-        growl "$zbell_lastcmd"
-    fi
   fi
   unset zbell_timestamp zbell_lastcmd ran_long has_ignored_cmd cmd words util
 }
