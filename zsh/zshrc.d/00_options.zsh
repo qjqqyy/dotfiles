@@ -42,7 +42,7 @@ LC_TIME=${LC_TIME:-en_GB.UTF-8}
 LANG=${LANG:-en_US.UTF-8}
 export EDITOR VISUAL PAGER TZ LC_COLLATE LC_TIME LANG
 
-# sanitize $TERM for OSes with shitty terminfo
+# OS specific stuff, eg sanitize $TERM for OSes with shitty terminfo
 if [[ $OSTYPE =~ freebsd ]]; then
   case $TERM in
     *konsole*)
@@ -57,4 +57,7 @@ elif [[ $OSTYPE =~ darwin ]]; then
     TERM=${TERM//-unicode/}
   fi
   unset LC_CTYPE
+  if [[ -d "$HOME/Library/Mobile Documents/com~apple~CloudDocs" ]]; then
+    hash -d -- icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+  fi
 fi
