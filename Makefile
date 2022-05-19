@@ -37,6 +37,13 @@ git: ~/.config/git/config
 	mkdir -p $(dir $@)
 	install -m644 $< $@
 
+.PHONY: mpv
+mpv: ~/.config/mpv/mpv.conf
+
+~/.config/mpv/mpv.conf: mpv.conf
+	mkdir -p $(dir $@)
+	install -m644 $< $@
+
 .PHONY: xmonad xmobar
 xmonad: ~/.xmonad/xmonad.hs ~/.xmonad/lib ~/bin/i3lock_wrapper
 
