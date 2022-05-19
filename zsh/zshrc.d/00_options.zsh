@@ -11,10 +11,11 @@ SAVEHIST=$HISTSIZE
 KEYTIMEOUT=2
 
 if (( $+commands[nvim] )); then
-  EDITOR='nvim'
-  VISUAL='nvim'
+  EDITOR=nvim
+  VISUAL=nvim
   alias vi=nvim
   alias vim=nvim
+  export VIMPAGER_VIM=nvim
 elif (( $+commands[vim] )); then
   EDITOR='vim'
   VISUAL='vim'
