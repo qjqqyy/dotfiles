@@ -2,4 +2,4 @@
 typeset -U path
 [[ -r $HOME/.zsh/zshrc.local ]] && source $HOME/.zsh/zshrc.local
 [[ -d $HOME/.zsh/zshrc.d ]] && for x in $HOME/.zsh/zshrc.d/*.zsh; do source $x; done
-[[ -d $HOME/bin ]] && path=($HOME/bin $path)
+[[ -d $HOME/bin ]] && path=($HOME/bin $path) || true
