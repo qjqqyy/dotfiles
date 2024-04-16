@@ -3,6 +3,11 @@ setopt histignorespace noflowcontrol rcexpandparam sharehistory
 autoload -Uz zmv run-help run-help-git ex colors
 colors
 
+DIRSTACKSIZE=10
+setopt autopushd pushdsilent pushdtohome
+## Uncomment to remove duplicate entries
+#setopt pushdignoredups
+
 # ignore autocorrect to autocomplete definitions
 CORRECT_IGNORE='_*'
 HISTFILE=$HOME/.zsh/history

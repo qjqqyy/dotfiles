@@ -44,6 +44,7 @@ alias la='ls -A'
 alias lla='ll -A'
 alias lh='ll -h'
 alias lah='lla -h'
+alias tree='tree -F'
 alias :q='exit'
 alias /quit='exit'
 if [[ $OSTYPE =~ (openbsd|solaris|linux-musl) ]]; then
