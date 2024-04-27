@@ -56,6 +56,9 @@ if [[ $OSTYPE =~ (openbsd|solaris|linux-musl) ]]; then
 else
   alias grep='grep -i --color=auto -d skip'
 fi
+if (( $+commands[rg] )); then
+  alias rg='rg -S'
+fi
 alias df='df -h'
 alias git='nocorrect noglob git'
 # force mouse off
