@@ -54,9 +54,6 @@ if [[ $OSTYPE =~ freebsd ]]; then
     *konsole*)
       TERM=xterm-256color
       ;;
-    *tmux*)
-      TERM=screen-256color
-      ;;
   esac
 elif [[ $OSTYPE =~ darwin ]]; then
   if [[ $TERM =~ "rxvt-unicode" && ! -r "$HOME/.terminfo/72/$TERM" ]]; then
