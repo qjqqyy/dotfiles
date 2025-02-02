@@ -38,11 +38,12 @@ else
     set nomodeline viminfo=
 endif
 
+set notermguicolors
+set t_Co=16
 set background=light
 colorscheme base16-default-light
 set cursorline
 
-set t_Co=16
 filetype plugin indent on
 
 set sw=4 sts=4 et
