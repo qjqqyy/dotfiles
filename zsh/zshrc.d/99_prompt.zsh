@@ -11,8 +11,13 @@ prompt () {
       RPROMPT=
       ;;
     ssh)
+      maybe_iterm2_prompt_mark() {
+        if typeset -f iterm2_prompt_mark >/dev/null 2>&1; then
+          iterm2_prompt_mark
+        fi
+      }
       PROMPT="%F{11}┌─%B(%b%F{green}%n%F{11}@%F{12}%m%F{11}%B)─(%b%F{12}%l%B%F{11})─(%b%F{7}%D{%H}%F{12}:%F{7}%D{%M}%F{12}:%F{7}%D{%S}%F{11}%B)─%(?..%F{yellow}[%b%F{red}%?%F{yellow}%B]%F{11}─)(%b%F{blue}%~%B%F{11})%b%F{11}┌─
-└─%{$(iterm2_prompt_mark)%}%(#.%F{red}%B#%b.%F{12}%%)%f "
+└─%{$(maybe_iterm2_prompt_mark)%}%(#.%F{red}%B#%b.%F{12}%%)%f "
       RPROMPT=
       ;;
     *)
