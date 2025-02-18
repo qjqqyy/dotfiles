@@ -1,0 +1,8 @@
+if [[ -n "$TMUX" ]]; then
+  if [[ "$( tmux list-windows | wc -l )" -eq 1 ]]; then
+    tmux set status on
+  else
+    tmux set status off
+  fi
+
+fi

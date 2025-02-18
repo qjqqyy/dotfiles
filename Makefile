@@ -3,13 +3,16 @@
 DOTPATH ?= .dotfiles
 
 .PHONY: zsh
-zsh: ~/.zsh ~/.zshrc
+zsh: ~/.zsh ~/.zshrc ~/.zlogout
 
 ~/.zsh:
 	ln -sf $(DOTPATH)/zsh $@
 
 ~/.zshrc: ~/.zsh
 	ln -sf .zsh/zshrc $@
+
+~/.zlogout: ~/.zsh
+	ln -sf .zsh/zlogout $@
 
 .PHONY: vim
 vim: ~/.vim
