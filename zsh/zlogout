@@ -1,8 +1,7 @@
 if [[ -n "$TMUX" ]]; then
-  if [[ "$( tmux list-windows | wc -l )" -eq 1 ]]; then
-    tmux set status on
-  else
+  _tmux_windows=$( tmux list-windows )
+  lines=("${(@f)_tmux_windows}")
+  if [[ ${#lines[@]} -eq 2 ]] && print "$_tmux_windows" | grep -q '(1 panes).*(active)' ; then
     tmux set status off
   fi
-
 fi
