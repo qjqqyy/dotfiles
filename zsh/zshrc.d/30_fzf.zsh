@@ -17,7 +17,7 @@ if (( $+commands[fzf] )); then
   fi
   ( fzf --zsh 2>/dev/null || cat /usr/share/doc/fzf/examples/key-bindings.zsh /usr/share/doc/fzf/examples/completion.zsh ) | source /dev/fd/0
 
-  if (( $+commands[pass] )); then
+  if (( $+commands[pass] )) && [[ -n "$fdfind" ]]; then
     alias pass=' pass'
     pass() {
       if [[ $1 == "show" && $# -eq 1 ]]; then
