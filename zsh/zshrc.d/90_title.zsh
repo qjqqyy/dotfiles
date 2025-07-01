@@ -8,7 +8,7 @@ case $TERM in
     }
 #    preexec () { print -Pn "\e]0;%n@%m:%d ($1)\a" }
     ;;
-  *rxvt*|*xterm*|*konsole*)
+  *rxvt*|*xterm*|*konsole*|*foot*)
     precmd () {
       print -Pn "\e]0;%n@%m:%d\a"
     }
