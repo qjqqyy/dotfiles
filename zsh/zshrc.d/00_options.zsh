@@ -20,7 +20,6 @@ if (( $+commands[nvim] )); then
   VISUAL=nvim
   alias vi=nvim
   alias vim=nvim
-  export VIMPAGER_VIM=nvim
 elif (( $+commands[vim] )); then
   EDITOR='vim'
   VISUAL='vim'
@@ -28,15 +27,14 @@ elif (( $+commands[vim] )); then
 else
   EDITOR='vi'
 fi
-if [[ -z "$PAGER" && -x $HOME/.vim/plug/vimpager/vimpager ]]; then
-  PAGER=$HOME/.vim/plug/vimpager/vimpager
+if [[ -z "$PAGER" ]] && (( $+commands[nvimpager] )); then
+  PAGER=nvimpager
   alias less=$PAGER
+  nvimcat() { nvimpager -c "$@" }
+  READNULLCMD=nvimcat
+  alias vimcat=nvimcat
 elif (( $+commands[less] )); then
   PAGER=${PAGER:-less}
-fi
-if [[ -x $HOME/.vim/plug/vimpager/vimcat ]]; then
-  READNULLCMD=$HOME/.vim/plug/vimpager/vimcat
-  alias vimcat=$READNULLCMD
 fi
 if (( $+commands[doas] )); then
   alias sudo='doas'

@@ -27,6 +27,13 @@ nvim: ~/.config/nvim/init.vim
 	mkdir -p $(dir $@)
 	ln -sf ../../$(DOTPATH)/$< $@
 
+.PHONY: nvimpager
+nvimpager: ~/.config/nvimpager/init.vim
+
+~/.config/nvimpager/init.vim: vim/vimpagerrc
+	mkdir -p $(dir $@)
+	ln -sf ../../$(DOTPATH)/$< $@
+
 .PHONY: tmux
 tmux: ~/.tmux.conf
 
