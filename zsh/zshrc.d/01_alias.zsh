@@ -65,3 +65,10 @@ alias git='nocorrect noglob git'
 alias mousereset=" printf '\033[?1002l'"
 
 unset _ls_flags _rm_flags _mv_flags _cp_flags
+
+if [[ -z "$NO_PROXY_AI_ASSISTANTS" ]]; then
+  _proxy_address='http://10.255.255.1:8888'
+  (( $+commands[claude] )) && alias claude="env HTTP_PROXY=$_proxy_address HTTPS_PROXY=$_proxy_address claude"
+  (( $+commands[gemini] )) && alias gemini="env HTTP_PROXY=$_proxy_address HTTPS_PROXY=$_proxy_address gemini"
+  unset _proxy_address
+fi
