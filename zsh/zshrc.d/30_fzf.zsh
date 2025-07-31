@@ -37,4 +37,13 @@ if (( $+commands[fzf] )); then
       fi
     }
   fi
+
+  if (( $+commands[claude] )) && [[ -f "$HOME/.claude/bash_history" ]]; then
+    claude-bash-history-widget() {
+      fc -p -a "$HOME/.claude/bash_history"
+      fzf-history-widget
+    }
+    zle -N claude-bash-history-widget
+    bindkey '^S' claude-bash-history-widget
+  fi
 fi
