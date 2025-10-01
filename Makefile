@@ -2,6 +2,15 @@
 # path of . relative to $HOME
 DOTPATH ?= .dotfiles
 
+.PHONY: claude
+claude: ~/.claude/CLAUDE.md ~/.claude/settings.json
+
+~/.claude/CLAUDE.md: claude/CLAUDE.md
+	install -m644 $< $@
+
+~/.claude/settings.json: claude/settings.json
+	install -m644 $< $@
+
 .PHONY: zsh
 zsh: ~/.zsh ~/.zshrc ~/.zlogout
 
