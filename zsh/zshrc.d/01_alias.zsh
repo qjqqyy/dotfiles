@@ -6,7 +6,8 @@ _ls_flags[compat]='-FH'
 _rm_flags[gnu]='-Iv --one-file-system'
 _rm_flags[freebsd]='-iv'
 _rm_flags[compat]='-i'
-_mv_flags[modern]='-iv'
+_mv_flags[gnu]='-iv'
+_mv_flags[freebsd]='-hiv'
 _mv_flags[compat]='-i'
 _cp_flags[modern]='-ipv'
 _cp_flags[compat]='-ip'
@@ -17,20 +18,20 @@ case $OSTYPE in
     alias cp="cp ${_cp_flags[modern]}"
     [[ $OSTYPE =~ musl ]] && alias rm="nocorrect noglob rm ${_rm_flags[freebsd]}"\
                           || alias rm="nocorrect noglob rm ${_rm_flags[gnu]}"
-    alias mv="nocorrect noglob mv ${_mv_flags[modern]}"
+    alias mv="nocorrect noglob mv ${_mv_flags[gnu]}"
     ;;
   *darwin*|freebsd*)
     alias ls="ls ${_ls_flags[freebsd]}"
     alias cp="cp ${_cp_flags[modern]}"
     alias rm="nocorrect noglob rm ${_rm_flags[freebsd]}"
-    alias mv="nocorrect noglob mv ${_mv_flags[modern]}"
+    alias mv="nocorrect noglob mv ${_mv_flags[freebsd]}"
     ;;
-  solaris*|openbsd*)
+  openbsd*)
     if (( $+commands[gls] )) && (( $+commands[gcp] )) && (( $+commands[gmv] )) && (( $+commands[grm] )); then
       alias ls="gls ${_ls_flags[gnu]}"
       alias cp="gcp ${_cp_flags[modern]}"
       alias rm="nocorrect noglob grm ${_rm_flags[gnu]}"
-      alias mv="nocorrect noglob gmv ${_mv_flags[modern]}"
+      alias mv="nocorrect noglob gmv ${_mv_flags[gnu]}"
     else
       alias ls="ls ${_ls_flags[compat]}"
       alias cp="cp ${_cp_flags[compat]}"
