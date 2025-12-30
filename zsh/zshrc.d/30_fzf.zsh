@@ -20,7 +20,7 @@ if (( $+commands[fzf] )); then
   if (( $+commands[pass] )) && [[ -n "$fdfind" ]]; then
     alias pass=' pass'
     pass() {
-      if [[ $1 == "show" && $# -eq 1 ]]; then
+      if [[ $1 == "show" && ( $# -eq 1 || ( $# -eq 2 && $2 == "-c" ) ) ]]; then
         local selected
         selected=$(cd "$HOME/.password-store" && \
           $fdfind --type f --extension gpg . | \
@@ -28,8 +28,13 @@ if (( $+commands[fzf] )); then
           fzf --prompt="> " --height=~75% --layout=reverse)
 
         if [[ -n "$selected" ]]; then
-          print -s "pass show \"$selected\""
-          command pass show "$selected"
+          if [[ $2 == "-c" ]]; then
+            print -s "pass show -c \"$selected\""
+            command pass show -c "$selected"
+          else
+            print -s "pass show \"$selected\""
+            command pass show "$selected"
+          fi
         fi
       else
         print -s "pass $*"
