@@ -80,3 +80,7 @@ zstyle ':completion:*:manuals.(^1*)' insert-sections true
 #zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns '*.*' loopback localhost
 #zstyle ':completion:*:(ssh|scp|rsync):*:hosts-domain' ignored-patterns '<->.<->.<->.<->' '^*.*' '*@*'
 #zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^<->.<->.<->.<->' '127.0.0.<->'
+
+if (( $+commands[jj] )); then
+  source <(COMPLETE=zsh jj)
+fi
