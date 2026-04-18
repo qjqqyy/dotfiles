@@ -32,7 +32,9 @@ if (( $+commands[less] )); then
 fi
 
 if (( $+commands[bat] )); then
-  export BAT_THEME=base16
+  BAT_THEME=base16
+  MANPAGER="bat -plman"
+  export BAT_THEME MANPAGER
 fi
 
 if (( $+commands[doas] )); then
