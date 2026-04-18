@@ -27,15 +27,14 @@ elif (( $+commands[vim] )); then
 else
   EDITOR='vi'
 fi
-if [[ -z "$PAGER" ]] && (( $+commands[nvimpager] )); then
-  PAGER=nvimpager
-  alias less=$PAGER
-  nvimcat() { nvimpager -c "$@" }
-  READNULLCMD=nvimcat
-  alias vimcat=nvimcat
-elif (( $+commands[less] )); then
+if (( $+commands[less] )); then
   PAGER=${PAGER:-less}
 fi
+
+if (( $+commands[bat] )); then
+  export BAT_THEME=base16
+fi
+
 if (( $+commands[doas] )); then
   alias sudo='doas'
 fi
