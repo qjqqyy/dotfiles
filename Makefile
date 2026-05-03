@@ -63,6 +63,13 @@ mpv: ~/.config/mpv/mpv.conf
 	mkdir -p $(dir $@)
 	install -m644 $< $@
 
+.PHONY: foot
+foot: ~/.config/foot/foot.ini
+
+~/.config/foot/foot.ini: foot.ini
+	mkdir -p $(dir $@)
+	install -m644 $< $@
+
 .PHONY: xmonad xmobar
 xmonad: ~/.xmonad/xmonad.hs ~/.xmonad/lib ~/bin/i3lock_wrapper
 
