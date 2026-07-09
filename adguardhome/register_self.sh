@@ -35,10 +35,10 @@ add_rewrite() {
   existing=$(find_rewrite "$domain")
   count=$(echo "$existing" | jq 'length')
 
-  if (( count > 1 )); then
+  if [ "$count" -gt 1 ]; then
     echo "multiple existing rewrites for $domain, refusing to guess, fix manually" >&2
     return 1
-  elif (( count == 1 )); then
+  elif [ "$count" -eq 1 ]; then
     delete_rewrite "$(echo "$existing" | jq -c '.[0]')"
   fi
 
@@ -47,7 +47,7 @@ add_rewrite() {
     -H 'Content-Type: application/json' \
     -d "{\"domain\":\"$domain\",\"answer\":\"$ip\"}")
 
-  if [[ "$code" == "200" ]]; then
+  if [ "$code" -eq "200" ]; then
     echo "registered $domain -> $ip"
   else
     echo "failed to register $domain -> $ip (HTTP $code)" >&2
