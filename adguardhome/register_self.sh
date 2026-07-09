@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # meant to be sourced, not executed directly
 # requires: curl, jq
